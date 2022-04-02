@@ -24,6 +24,7 @@ public class ProgressSlider : MonoBehaviour
         UITester.onChange -= Refresh;
     }
 
+    [ExecuteAlways]
     private void Refresh(float value)
     {
         _slider.value = Mathf.Clamp(value, 0.0f, 100.0f);

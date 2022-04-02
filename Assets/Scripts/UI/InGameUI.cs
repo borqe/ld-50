@@ -23,4 +23,5 @@ public class InGameUI: MonoBehaviour
     {
         _progressSlider.SetActive(true);
     }
+
 }
