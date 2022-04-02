@@ -67,9 +67,10 @@ public class GameUI : MonoBehaviour
     }
     
 
-    public void CreatePopup(Vector3 worldPosition)
+    public PopupBase CreatePopup(Vector3 worldPosition)
     {
         var popup = Instantiate(_popupPrefab, _worldCanvas.transform);
         popup.transform.position = worldPosition;
+        return popup.GetComponent<PopupBase>();
     }
 }

@@ -15,7 +15,7 @@ public class AIState_Charging : AIState
         public float PerSecondDataTransfer;
         public float PerConnectionDataTransferMultiplier;
 
-        public float DataTranferPerConnection;
+        public float DataTransferPerConnection;
     }
 
     private class ConnectingCable
@@ -62,11 +62,15 @@ public class AIState_Charging : AIState
             NextCableConnectionIn = Random.Range(AIController.Settings.ChargingSettings.MinCableConnectionInterval, AIController.Settings.ChargingSettings.MaxCableConnectionInterval);
         }
 
-        float dataTransfer = AIController.Settings.ChargingSettings.PerSecondDataTransfer * Time.deltaTime * (AIController.ConnectedCables.Count * AIController.Settings.ChargingSettings.PerConnectionDataTransferMultiplier);
-        AIController.AddDataTransfer(dataTransfer);
+        IncramentDataTransferred();
+    }
 
-        if (AIController.AIData.DataTransfered >= AIController.Settings.MaxCharge)
-            AIController.GameOver();
+    private void IncramentDataTransferred()
+    {
+        int fullyConnectedCables = AIController.GetFullyConenctedCableCount();
+
+        float dataTransfer = Time.deltaTime * AIController.Settings.ChargingSettings.PerSecondDataTransfer * fullyConnectedCables * AIController.Settings.ChargingSettings.PerConnectionDataTransferMultiplier;
+        AIController.AddDataTransfer(dataTransfer);
     }
 
     private void StartNewCableConnection()
@@ -90,7 +94,13 @@ public class AIState_Charging : AIState
         CablePlug endplug = cc.Cable.GetPlug(CablePlugType.End);
         endplug.SnapTo(cc.Module.CableAttachementPosition.position);
 
-        AIController.AddDataTransfer(AIController.Settings.ChargingSettings.DataTranferPerConnection);
+        GameUI.Instance.CreatePopup(cc.Module.CableAttachementPosition.position + new Vector3(0, 0.5f, 0)).onTimerEnd += () => CableFullyConnected(cc.Cable);
+    }
+
+    private void CableFullyConnected(Cable cable)
+    {
+        AIController.AddDataTransfer(AIController.Settings.ChargingSettings.DataTransferPerConnection);
+        cable.SetIsFullyConnected(true);
     }
 
     private void MoveEndPlug(ConnectingCable connectingCable)

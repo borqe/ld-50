@@ -10,6 +10,8 @@ public class Cable : MonoBehaviour
     [SerializeField] private CablePlug StartPlug;
     [SerializeField] private CablePlug EndPlug;
 
+    public bool IsFullyConnected { get; private set; }
+
     private void Awake()
     {
         LineRenderer = GetComponent<LineRenderer>();
@@ -38,5 +40,10 @@ public class Cable : MonoBehaviour
     private void OnPlugPosChanged(int pointIndexInLine, CablePlug plug)
     {
         LineRenderer.SetPosition(pointIndexInLine, plug.transform.position);
+    }
+
+    public void SetIsFullyConnected(bool value)
+    {
+        IsFullyConnected = true;
     }
 }

@@ -101,15 +101,29 @@ public class AIController : Singleton<AIController>
         CurrentState = state;
     }
 
+    public int GetFullyConenctedCableCount()
+    {
+        int count = 0;
+        for (int i = 0; i < ConnectedCables.Count; i++)
+        {
+            if (ConnectedCables[i].IsFullyConnected)
+                count++;
+        }
+        return count;
+    }
+
     public void AddDataTransfer(float value)
     {
         AIData.DataTransfered += value;
         OnDataTransferedChanged?.Invoke(AIData.DataTransfered / 10f);
+
+        if (AIData.DataTransfered >= Settings.MaxCharge)
+            GameOver();
     }
 
     public void GameOver()
     {
         OnDataTransferFull?.Invoke();
-        CurrentState = new AIState_Idle(this);
+        CurrentState = new AIState_Idle(this, supressEvent: true);
     }
 }

@@ -37,22 +37,6 @@ public class UITester : MonoBehaviour
     private void OnStartGame()
     {
         _gameInProgress = true;
-        StartCoroutine(PopupSpawnCoroutine());
-    }
-
-    private IEnumerator PopupSpawnCoroutine()
-    {
-        while (_gameInProgress)
-        {
-            if (_timer > 2.0f)
-            {
-                GetComponent<GameUI>().CreatePopup(_consoleModules[Random.Range(0, _consoleModules.Count - 1)].gameObject.transform.position);
-                _timer = 0.0f;
-            }
-
-            _timer += Time.deltaTime;
-            yield return null;
-        }
     }
     
 #endif // UNITY_EDITOR
