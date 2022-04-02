@@ -25,6 +25,7 @@ public class GameUI : MonoBehaviour
     
     [SerializeField] private InGameUI _inGameUI;
     [SerializeField] private PauseUI _pauseUI;
+    [SerializeField] private StartUI _startUI;
 
     [Header("Popups")] 
     [SerializeField] private GameObject _popupPrefab;
@@ -39,12 +40,20 @@ public class GameUI : MonoBehaviour
     {
         GameEventInvoker.onPauseGame += OnPauseGame;
         GameEventInvoker.onUnpauseGame += OnUnpauseGame;
+        GameEventInvoker.onEndGame += OnEndGame;
     }
 
     private void OnDisable()
     {
         GameEventInvoker.onPauseGame -= OnPauseGame;
         GameEventInvoker.onUnpauseGame -= OnUnpauseGame;
+        GameEventInvoker.onEndGame -= OnEndGame;
+    }
+
+    private void OnEndGame()
+    {
+        _pauseUI.gameObject.SetActive(false);
+        _startUI.gameObject.SetActive(true);
     }
 
     private void OnUnpauseGame()
