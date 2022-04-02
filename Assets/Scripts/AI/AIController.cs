@@ -20,7 +20,8 @@ public class AIController : Singleton<AIController>
     private AIState PreviousState;
     private AIState CurrentState;
 
-    public Action OnDataTransfteredChanged;
+    public Action<float> OnDataTransferedChanged;
+    public Action OnDataTransferFull;
 
     private void Awake()
     {
@@ -39,7 +40,7 @@ public class AIController : Singleton<AIController>
     {
         GameEventInvoker.onStartGame += OnStartGame;
         GameEventInvoker.onPauseGame += OnPauseGame;
-        GameEventInvoker.onUnpauseGame += OnUnpasueGame;
+        GameEventInvoker.onUnpauseGame += OnUnpausedGame;
         GameEventInvoker.onEndGame += OnEndGame;
     }
 
@@ -47,7 +48,7 @@ public class AIController : Singleton<AIController>
     {
         GameEventInvoker.onStartGame -= OnStartGame;
         GameEventInvoker.onPauseGame -= OnPauseGame;
-        GameEventInvoker.onUnpauseGame -= OnUnpasueGame;
+        GameEventInvoker.onUnpauseGame -= OnUnpausedGame;
         GameEventInvoker.onEndGame -= OnEndGame;
     }
 
@@ -66,7 +67,7 @@ public class AIController : Singleton<AIController>
         DisableLogic();
     }
 
-    private void OnUnpasueGame()
+    private void OnUnpausedGame()
     {
         EnableLogic();
     }
@@ -96,7 +97,11 @@ public class AIController : Singleton<AIController>
     public void AddDataTransfer(float value)
     {
         AIData.DataTransfered += value;
-        Debug.LogError(AIData.DataTransfered);
-        OnDataTransfteredChanged?.Invoke();
+        OnDataTransferedChanged?.Invoke(AIData.DataTransfered / 10f);
+    }
+
+    public void GameOver()
+    {
+        OnDataTransferFull?.Invoke();
     }
 }

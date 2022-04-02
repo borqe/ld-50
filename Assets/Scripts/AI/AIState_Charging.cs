@@ -63,6 +63,9 @@ public class AIState_Charging : AIState
 
         float dataTransfer = AIController.Settings.ChargingSettings.PerSecondDataTransfer * Time.deltaTime * (AIController.ConnectedCables.Count * AIController.Settings.ChargingSettings.PerConnectionDataTransferMultiplier);
         AIController.AddDataTransfer(dataTransfer);
+
+        if (AIController.AIData.DataTransfered >= AIController.Settings.MaxCharge)
+            AIController.GameOver();
     }
 
     private void StartNewCableConnection()
