@@ -8,6 +8,12 @@ public class AIData
     public float DataTransfered;
 }
 
+public enum AIStateType
+{ 
+    Idle,
+    TransferingData,
+}
+
 public class AIController : Singleton<AIController>
 {
     [SerializeField] private AISettings AISettings;
@@ -22,6 +28,7 @@ public class AIController : Singleton<AIController>
 
     public Action<float> OnDataTransferedChanged;
     public Action OnDataTransferFull;
+    public Action<AIStateType> OnAIStateChanged;
 
     private void Awake()
     {
@@ -74,7 +81,7 @@ public class AIController : Singleton<AIController>
 
     private void EnableLogic()
     {
-        CurrentState = PreviousState != null ? PreviousState : new AIState_Starting(this);
+        CurrentState = PreviousState != null ? PreviousState : new AIState_Charging(this);
     }
 
     private void DisableLogic()
@@ -103,5 +110,6 @@ public class AIController : Singleton<AIController>
     public void GameOver()
     {
         OnDataTransferFull?.Invoke();
+        CurrentState = new AIState_Idle(this);
     }
 }

@@ -46,5 +46,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CablePrefab: {fileID: 4110145496643133868, guid: 99a2affbb62cb7b469e5bb851e46d944,
     type: 3}
-  AI: {fileID: 0}
-  StartConnections: []
