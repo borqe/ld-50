@@ -25,22 +25,35 @@ public class GameUI : MonoBehaviour
     
     [SerializeField] private InGameUI _inGameUI;
     [SerializeField] private PauseUI _pauseUI;
+    [SerializeField] private StartUI _startUI;
+
+    [Header("Popups")] 
+    [SerializeField] private GameObject _popupPrefab;
     
     private void Start()
     {
         _pauseUI.gameObject.SetActive(false);
+        _worldCanvas.worldCamera = Camera.main;
     }
 
     private void OnEnable()
     {
         GameEventInvoker.onPauseGame += OnPauseGame;
         GameEventInvoker.onUnpauseGame += OnUnpauseGame;
+        GameEventInvoker.onEndGame += OnEndGame;
     }
 
     private void OnDisable()
     {
         GameEventInvoker.onPauseGame -= OnPauseGame;
         GameEventInvoker.onUnpauseGame -= OnUnpauseGame;
+        GameEventInvoker.onEndGame -= OnEndGame;
+    }
+
+    private void OnEndGame()
+    {
+        _pauseUI.gameObject.SetActive(false);
+        _startUI.gameObject.SetActive(true);
     }
 
     private void OnUnpauseGame()
@@ -51,5 +64,12 @@ public class GameUI : MonoBehaviour
     private void OnPauseGame()
     {
         _pauseUI.gameObject.SetActive(true);
+    }
+    
+
+    public void CreatePopup(Vector3 worldPosition)
+    {
+        var popup = Instantiate(_popupPrefab, _worldCanvas.transform);
+        popup.transform.position = worldPosition;
     }
 }

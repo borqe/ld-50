@@ -12,13 +12,20 @@ public class InGameUI: MonoBehaviour
     private void OnEnable()
     {
         GameEventInvoker.onStartGame += OnGameStart;
+        GameEventInvoker.onEndGame += OnGameEnd;
     }
 
     private void OnDisable()
     {
-        GameEventInvoker.onStartGame += OnGameStart;
+        GameEventInvoker.onStartGame -= OnGameStart;
+        GameEventInvoker.onEndGame -= OnGameEnd;
     }
-    
+
+    private void OnGameEnd()
+    {
+        _progressSlider.SetActive(false);
+    }
+
     private void OnGameStart()
     {
         _progressSlider.SetActive(true);
