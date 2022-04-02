@@ -14,6 +14,8 @@ public class CablePlug : MonoBehaviour
     private Vector3 OnMouseDownScreenPoint;
     private Vector3 DragOffset;
 
+    private ConsoleModule ConsoleToSnapTo;
+
     public void Setup(Vector3 position, bool canBeMoved, Action<CablePlug> onPositionChanged = null)
     {
         transform.position = position;
@@ -21,11 +23,40 @@ public class CablePlug : MonoBehaviour
         OnPositionChanged = onPositionChanged;
     }
 
+    public void SnapToOnEndMouseDrag(ConsoleModule module)
+    {
+        ConsoleToSnapTo = module;
+    }
+    public void CancelSnapping()
+    {
+        ConsoleToSnapTo = null;
+    }
+
+    public void SnapTo(Vector3 position)
+    {
+        transform.position = position;
+        OnPositionChanged?.Invoke(this);
+    }
+
+
+    private void OnMouseUp()
+    {
+        if (!CanBeMoved)
+            return;
+
+        if (ConsoleToSnapTo != null)
+        {
+            SnapTo(ConsoleToSnapTo.transform.position);
+            ConsoleToSnapTo = null;
+        }
+
+    }
 
     void OnMouseDown()
     {
         if (!CanBeMoved)
             return;
+        ConsoleToSnapTo = null;
         OnMouseDownScreenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         DragOffset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, OnMouseDownScreenPoint.z));
     }

@@ -3,11 +3,71 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshRenderer))]
 public class ConsoleModule : MonoBehaviour
 {
+    [SerializeField] private Material ConnectedMaterial;
+    [SerializeField] private Material DisconnectedMaterial;
+
     [SerializeField] private Transform _CableAttachementPosition;
     public Transform CableAttachementPosition => _CableAttachementPosition;
 
-    public Action OnConnected;
-    public Action OnDisconnected;
+    private MeshRenderer MeshRenderer;
+
+    public Action OnCableConnected;
+    public Action OnCableDisconnected;
+
+    public CablePlug ConnectedCablePlug { get; private set; }
+    private const string CablePlugTag = "CablePlug";
+
+    private void Awake()
+    {
+        MeshRenderer = GetComponent<MeshRenderer>();
+        MeshRenderer.material = DisconnectedMaterial;
+    }
+
+    public void Disconnected()
+    {
+        MeshRenderer.material = DisconnectedMaterial;
+        ConnectedCablePlug.CancelSnapping();
+        OnCableDisconnected?.Invoke();
+    }
+
+    public void Connected()
+    {
+        MeshRenderer.material = ConnectedMaterial;
+        ConnectedCablePlug.SnapToOnEndMouseDrag(this);
+        OnCableConnected?.Invoke();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.gameObject.CompareTag(CablePlugTag))
+            return;
+
+        CablePlug plug = other.gameObject.GetComponent<CablePlug>();
+        if (plug == null)
+            return;
+
+        if (ConnectedCablePlug != null)
+            return;
+
+        ConnectedCablePlug = plug;
+        Connected();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.gameObject.CompareTag(CablePlugTag))
+            return;
+
+        if (ConnectedCablePlug == null)
+            return;
+
+        if (other.gameObject == ConnectedCablePlug.gameObject) 
+        {
+            Disconnected();
+            ConnectedCablePlug = null;
+        }
+    }
 }
