@@ -6,20 +6,27 @@ using UnityEngine;
 public class Cable : MonoBehaviour
 {
     private LineRenderer LineRenderer;
+
+    [SerializeField] private CablePlug StartPlug;
+    [SerializeField] private CablePlug EndPlug;
+
     private void Awake()
     {
         LineRenderer = GetComponent<LineRenderer>();
         transform.position = Vector3.zero;
     }
 
-    public void Setup(params Transform[] attachements)
+    public void Setup(Transform start, Transform end)
     {
-        Vector3[] positions = new Vector3[attachements.Length];
-        for (int i = 0; i < attachements.Length; i++)
-        {
-            positions[i] = attachements[i].position;
-        }
+        StartPlug.Setup(start.position, false, null);
+        EndPlug.Setup(end.position, true, (plug) => OnPlugPosChanged(1, plug));
+        Vector3[] positions = new Vector3[] {start.position, end.position};
 
         LineRenderer.SetPositions(positions);
+    }
+
+    private void OnPlugPosChanged(int pointIndexInLine, CablePlug plug)
+    {
+        LineRenderer.SetPosition(pointIndexInLine, plug.transform.position);
     }
 }
