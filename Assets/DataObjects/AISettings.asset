@@ -14,9 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinCharge: 0
   MaxCharge: 1000
-  StartingSettings:
-    TransitionToCharge: 0
-    ChargeGainPerSec: 10
   ChargingSettings:
     MinCableConnectionInterval: 2
     MaxCableConnectionInterval: 3
@@ -24,4 +21,4 @@ MonoBehaviour:
     MaxCableConnectionTime: 7
     PerSecondDataTransfer: 20
     PerConnectionDataTransferMultiplier: 0.75
-    DataTranferPerConnection: 50
+    DataTransferPerConnection: 0

@@ -14,7 +14,7 @@ public class ConsoleModule : MonoBehaviour
 
     private MeshRenderer MeshRenderer;
 
-    public Action OnCableConnected;
+    public Action OnCableInitiallyConnected;
     public Action OnCableDisconnected;
 
     public CablePlug ConnectedCablePlug { get; private set; }
@@ -33,11 +33,11 @@ public class ConsoleModule : MonoBehaviour
         OnCableDisconnected?.Invoke();
     }
 
-    public void Connected()
+    public void InitiallyConnected()
     {
         MeshRenderer.material = ConnectedMaterial;
         ConnectedCablePlug.SnapToOnEndMouseDrag(this);
-        OnCableConnected?.Invoke();
+        OnCableInitiallyConnected?.Invoke();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -53,7 +53,7 @@ public class ConsoleModule : MonoBehaviour
             return;
 
         ConnectedCablePlug = plug;
-        Connected();
+        InitiallyConnected();
     }
 
     private void OnTriggerExit(Collider other)

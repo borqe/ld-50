@@ -28,12 +28,6 @@ public class PopupBase: MonoBehaviour
         UpdateAnimation();
     }
 
-    private void OnMouseDown()
-    {
-        onPopupClicked?.Invoke();
-        Destroy(gameObject);
-    }
-
     private void UpdateAnimation()
     {
         _radialImage.fillAmount = 1.0f - _timePassed / _timeToClick;

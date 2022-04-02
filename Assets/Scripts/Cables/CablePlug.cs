@@ -70,7 +70,18 @@ public class CablePlug : MonoBehaviour
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, OnMouseDownScreenPoint.z);
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + DragOffset;
         transform.position = curPosition;
+    }
 
+    public void EnableGravity()
+    {
+        GetComponent<Rigidbody>().useGravity = true;
+        BoxCollider bc = GetComponent<BoxCollider>();
+        bc.isTrigger = false;
+        CanBeMoved = false;
+    }
+
+    public void Update()
+    {
         Vector3 delta = transform.position - LastUpdatePosition;
         float deltaMagnitudeSqr = delta.sqrMagnitude;
         if (deltaMagnitudeSqr > MinDraggingUpdateMagnitude)
@@ -78,6 +89,5 @@ public class CablePlug : MonoBehaviour
             LastUpdatePosition = transform.position;
             OnPositionChanged?.Invoke(this);
         }
-
     }
 }

@@ -83,7 +83,7 @@ public class AIState_Charging : AIState
         float connectionSpeed = Vector3.Distance(startPos, endPos) / connectionTime;
         ConnectingCable cc = new ConnectingCable(connectionSpeed, CableManager.Instance.SpawnCable(startPos, startPos), consoleModule);
 
-        cc.Module.OnCableConnected += () => OnCableConnected(cc);
+        cc.Module.OnCableInitiallyConnected += () => OnCableConnected(cc);
         ConnectingCables.Add(cc);
     }
 
@@ -94,7 +94,7 @@ public class AIState_Charging : AIState
         CablePlug endplug = cc.Cable.GetPlug(CablePlugType.End);
         endplug.SnapTo(cc.Module.CableAttachementPosition.position);
 
-        GameUI.Instance.CreatePopup(cc.Module.CableAttachementPosition.position + new Vector3(0, 0.5f, 0)).onTimerEnd += () => CableFullyConnected(cc.Cable);
+        cc.Cable.OnInitiallyConencted(CableFullyConnected, AIController.CableDisconnected, cc.Module);
     }
 
     private void CableFullyConnected(Cable cable)

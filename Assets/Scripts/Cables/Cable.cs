@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,9 @@ public class Cable : MonoBehaviour
     [SerializeField] private CablePlug StartPlug;
     [SerializeField] private CablePlug EndPlug;
 
+    private ConsoleModule ConsoleModule;
+    private PopupBase ConnectingPopup;
+    private Action<Cable> OnDisconnected;
     public bool IsFullyConnected { get; private set; }
 
     private void Awake()
@@ -25,6 +29,25 @@ public class Cable : MonoBehaviour
         Vector3[] positions = new Vector3[] {start, end};
 
         LineRenderer.SetPositions(positions);
+    }
+
+    public void OnInitiallyConencted(Action<Cable> onFullyConencted, Action<Cable> onDisconnected, ConsoleModule module)
+    {
+        ConsoleModule = module;
+        OnDisconnected = onDisconnected;
+
+        module.OnCableDisconnected += Disconnected;
+        PopupBase popup = GameUI.Instance.CreatePopup(ConsoleModule.CableAttachementPosition.position + new Vector3(0, 0.5f, 0));
+        popup.onTimerEnd += () => onFullyConencted(this);
+        ConnectingPopup = popup;
+    }
+
+    private void Disconnected()
+    {
+        OnDisconnected?.Invoke(this);
+        if(ConnectingPopup != null)
+            Destroy(ConnectingPopup.gameObject);
+        EndPlug.EnableGravity();
     }
 
     public CablePlug GetPlug(CablePlugType plugType)

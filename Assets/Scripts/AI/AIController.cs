@@ -126,4 +126,9 @@ public class AIController : Singleton<AIController>
         OnDataTransferFull?.Invoke();
         CurrentState = new AIState_Idle(this, supressEvent: true);
     }
+
+    public void CableDisconnected(Cable cable)
+    {
+        ConnectedCables.Remove(cable);
+    }
 }
