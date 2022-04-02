@@ -8,6 +8,11 @@ public class Console : MonoBehaviour
 
     private void Start()
     {
-        
+        AIController.Instance.NewConsoleSpawned(this);
+    }
+
+    public ConsoleModule GetRandomModule()
+    {
+        return Modules.GetRandomInList();
     }
 }

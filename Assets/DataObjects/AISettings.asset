@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3783fb6ce58443e42b15f45568975320, type: 3}
+  m_Name: AISettings
+  m_EditorClassIdentifier: 
+  MinCharge: 0
+  MaxCharge: 1000
+  StartingSettings:
+    TransitionToCharge: 0
+    ChargeGainPerSec: 10
+  ChargingSettings:
+    MinCableConnectionInterval: 2
+    MaxCableConnectionInterval: 3
+    MinCableConnectionTime: 5
+    MaxCableConnectionTime: 7
+    PerSecondDataTransfer: 20
+    PerConnectionDataTransferMultiplier: 0.75
+    DataTranferPerConnection: 50

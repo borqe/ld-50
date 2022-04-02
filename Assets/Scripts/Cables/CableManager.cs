@@ -13,7 +13,14 @@ public class CableManager : Singleton<CableManager>
     {
         foreach (var module in StartConnections)
         {
-            Instantiate(CablePrefab, transform).Setup(AI.transform, module.CableAttachementPosition);
+            SpawnCable(AI.transform.position, module.CableAttachementPosition.position);
         }
+    }
+
+    public Cable SpawnCable(Vector3 start, Vector3 end)
+    { 
+        Cable c = Instantiate(CablePrefab, transform);
+        c.Setup(start, end);
+        return c;
     }
 }

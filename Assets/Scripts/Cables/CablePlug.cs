@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CablePlugType { Start = 0, End = 2 }
+
 public class CablePlug : MonoBehaviour
 {
     public bool CanBeMoved { get; private set; } = true;
@@ -37,7 +39,6 @@ public class CablePlug : MonoBehaviour
         transform.position = position;
         OnPositionChanged?.Invoke(this);
     }
-
 
     private void OnMouseUp()
     {
