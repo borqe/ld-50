@@ -16,12 +16,12 @@ public class ProgressSlider : MonoBehaviour
 
     private void OnEnable()
     {
-        UITester.onChange += Refresh;
+        AIController.Instance.OnDataTransferedChanged += Refresh;
     }
 
     private void OnDisable()
     {
-        UITester.onChange -= Refresh;
+        AIController.Instance.OnDataTransferedChanged -= Refresh;
     }
 
     [ExecuteAlways]

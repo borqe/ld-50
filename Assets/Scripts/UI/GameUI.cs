@@ -41,6 +41,8 @@ public class GameUI : MonoBehaviour
         GameEventInvoker.onPauseGame += OnPauseGame;
         GameEventInvoker.onUnpauseGame += OnUnpauseGame;
         GameEventInvoker.onEndGame += OnEndGame;
+        
+        AIController.Instance.OnDataTransferFull += OnEndGame;
     }
 
     private void OnDisable()
@@ -48,6 +50,8 @@ public class GameUI : MonoBehaviour
         GameEventInvoker.onPauseGame -= OnPauseGame;
         GameEventInvoker.onUnpauseGame -= OnUnpauseGame;
         GameEventInvoker.onEndGame -= OnEndGame;
+
+        AIController.Instance.OnDataTransferFull -= OnEndGame;
     }
 
     private void OnEndGame()
