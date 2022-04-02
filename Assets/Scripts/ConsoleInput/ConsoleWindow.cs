@@ -13,6 +13,8 @@ public class ConsoleWindow : MonoBehaviour
     [Header("UI Stuff")]
     [SerializeField] private TMP_InputField _consoleInput;
     [SerializeField] private TMP_Text _consoleOutput;
+    [SerializeField] private TMP_Text _consoleHandle;
+    [SerializeField] private TMP_Text _consoleUser;
     [SerializeField] private ConsoleSettings _settings;
     [SerializeField] private ScrollRect _scrollRect;
 
@@ -27,6 +29,8 @@ public class ConsoleWindow : MonoBehaviour
     {
         _consoleInput.onSubmit.AddListener(OnConsoleSubmit);
         _eventSystem.SetSelectedGameObject(_consoleInput.gameObject);
+        
+        UpdateUser(_settings.UserString);
     }
     
     public void ResetPosition()
@@ -48,6 +52,12 @@ public class ConsoleWindow : MonoBehaviour
                 case "clear":
                     ClearOutput();
                     return;
+                case "login":
+                    StartLoginSequence();
+                    return;
+                case "start":
+                    StartGame();
+                    return;
                 default:
                     PrintOutput(command, commands.commandDictionary[command]);
                     return;
@@ -59,9 +69,31 @@ public class ConsoleWindow : MonoBehaviour
         }
     }
 
+    public void UpdateUser(string userString)
+    {
+        _consoleHandle.text = userString + "/ Terminal";
+        _consoleUser.text = userString + "~ ";
+    }
+
+    private void StartGame()
+    {
+        Debug.Log("start game");
+    }
+
+    private void StartLoginSequence()
+    {
+        Debug.Log("start login");
+    }
+
+    public void CloseConsole()
+    {
+        gameObject.SetActive(false);
+        // print out the "are you sure", then wait for y/n
+    }
+
     private void PrintOutput(string command, string output)
     {
-        _consoleOutput.text = _consoleOutput.text + Environment.NewLine + command + Environment.NewLine + output.Replace("\\n", Environment.NewLine);
+        _consoleOutput.text = _consoleOutput.text + _consoleUser.text + command + Environment.NewLine + output.Replace("\\n", Environment.NewLine);
         _consoleInput.text = "";
         ResetPosition();
     }

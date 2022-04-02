@@ -4,4 +4,5 @@ using UnityEngine;
 public class ConsoleSettings : ScriptableObject
 {
     public string UserString;
+    public string AIString;
 }

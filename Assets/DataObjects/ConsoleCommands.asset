@@ -18,3 +18,5 @@ MonoBehaviour:
       commands\nclear - clear the terminal window\netc\n\n
   - commandName: clear
     commandResponse: 
+  - commandName: processes
+    commandResponse: All running processes:\n\nasdf
