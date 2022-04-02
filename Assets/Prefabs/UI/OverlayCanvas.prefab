@@ -361,11 +361,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ConsoleView
       objectReference: {fileID: 0}
-    - target: {fileID: 8593654707731387894, guid: f09ebe826897847a59642d5abcc465d9,
-        type: 3}
-      propertyPath: m_Value
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8995778116426026639, guid: f09ebe826897847a59642d5abcc465d9,
         type: 3}
       propertyPath: m_AnchorMax.x
