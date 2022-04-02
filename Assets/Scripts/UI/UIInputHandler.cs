@@ -19,10 +19,5 @@
                 }
                 return;
             }
-
-            if (Input.GetKey(KeyCode.E))
-            {
-                Debug.Log("E");
-            }
         }
     }
