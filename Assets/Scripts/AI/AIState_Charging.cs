@@ -78,17 +78,11 @@ public class AIState_Charging : AIState
     {
         float connectionTime = Random.Range(AIController.Settings.ChargingSettings.MinCableConnectionTime, AIController.Settings.ChargingSettings.MaxCableConnectionTime);
 
-        ConsoleModule consoleModule = null;
-        const int MAX_TRIES = 100;
-        int tries = 0;
-        do
-        {
-            var console = AIController.Consoles.GetRandomInList();
-            if(console != null)
-                consoleModule = console.GetRandomModule();
-            tries++;
-        } while ((consoleModule == null || !consoleModule.IsConnectedOrBeingConnectedTo()) && tries < MAX_TRIES);
+        Console console = GetRandomConsoleWithFreeModules();
+        if (console == null)
+            return;
 
+        ConsoleModule consoleModule = console.GetRandomConsoleNotInUse();
         if (consoleModule == null)
             return;
 
@@ -100,6 +94,20 @@ public class AIState_Charging : AIState
         cc.Module.OnCableInitiallyConnected += () => OnCableConnected(cc);
         ConnectingCables.Add(cc);
         AIController.ConnectingCables.Add(cc);
+    }
+
+    private Console GetRandomConsoleWithFreeModules()
+    {
+        List<Console> free = new List<Console>();
+        for (int i = 0; i < AIController.Consoles.Count; i++)
+        {
+            var c = AIController.Consoles[i];
+            if (c.HasFreeModules())
+                free.Add(c);
+        }
+        if (free.Count == 0)
+            return null;
+        return free.GetRandomInList();
     }
 
     private void OnCableConnected(ConnectingCable cc)

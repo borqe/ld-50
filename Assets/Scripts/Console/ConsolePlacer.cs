@@ -55,6 +55,7 @@ public class ConsolePlacer : MonoBehaviour
 
             angle += deltaAngle;
 
+            c.Init(Data.AmountOfModulesToRemoveFromConsoles);
             SpawnedConsoles.Add(c);
         }
     }

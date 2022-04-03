@@ -8,4 +8,6 @@ public class ConsolePlacerData : ScriptableObject
     public Console ConsolePrefab;
     public int AmountOfConsoles;
     public float DistanceFromCenter;
+
+    [Range(0f, 1f)] public float AmountOfModulesToRemoveFromConsoles;
 }
