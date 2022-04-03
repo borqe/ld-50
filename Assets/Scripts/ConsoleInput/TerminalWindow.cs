@@ -9,13 +9,15 @@ using UnityEngine.UI;
 
 public class TerminalWindow : MonoBehaviour
 {
-    [Header("UI Stuff")]
+    [Header("UI Stuff")] 
+    [SerializeField] private GameObject _terminalGameObject;
     [SerializeField] private TMP_InputField _terminalInput;
     [SerializeField] private TMP_Text _consoleOutput;
     [SerializeField] private TMP_Text _terminalHandle;
     [SerializeField] private TMP_Text _terminalUser;
     [SerializeField] private TerminalSettings _settings;
     [SerializeField] private ScrollRect _scrollRect;
+    
 
     private EventSystem _eventSystem;
 
@@ -27,12 +29,17 @@ public class TerminalWindow : MonoBehaviour
 
     private void OnEnable()
     {
-        _terminalInput.onSubmit.AddListener(OnTerminalSubmit);
-        _eventSystem.SetSelectedGameObject(_terminalInput.gameObject);
-        
         UpdateUser(_settings.UserString);
-        
+        _terminalInput.onSubmit.AddListener(OnTerminalSubmit);
         GameStateChangedEvent.AddListener(OnGameStateChanged);
+        ResetPosition();
+    }
+
+    private void OnDisable()
+    {
+        _terminalInput.onSubmit.RemoveListener(OnTerminalSubmit);
+        _eventSystem.SetSelectedGameObject(null);
+        GameStateChangedEvent.RemoveListener(OnGameStateChanged);
     }
 
     private void OnGameStateChanged(GameStateChangedEvent eventData)
@@ -40,11 +47,13 @@ public class TerminalWindow : MonoBehaviour
         switch (eventData.State)
         {
             case GameState.GameStateEnum.InTerminalWindow:
+                OpenTerminal();
                 break;
             case GameState.GameStateEnum.InProgress:
                 CloseTerminal();
                 break;
             case GameState.GameStateEnum.GameOver:
+                OpenTerminal();
                 break;
             default:
                 break;
@@ -93,13 +102,14 @@ public class TerminalWindow : MonoBehaviour
 
     public void CloseTerminal()
     {
-        gameObject.SetActive(false);
+        _terminalGameObject.SetActive(false);
         // print out the "are you sure", then wait for y/n
     }
 
     public void OpenTerminal()
     {
-        gameObject.SetActive(true);
+        _terminalGameObject.SetActive(true);
+        ResetPosition();
     }
 
     public void PrintOutput(string command, string output)
