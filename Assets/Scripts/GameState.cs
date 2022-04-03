@@ -1,50 +1,53 @@
 using System;
 using UnityEngine;
 
-public class GameState: MonoBehaviour
+public class SetGameStateEvent : Event<SetGameStateEvent>
 {
-    public static GameStateEnum CurrentState;
+    public GameState.GameStateEnum NewState;
+
+    public SetGameStateEvent(GameState.GameStateEnum state)
+    {
+        NewState = state;
+    }
+}
+
+public class GameStateChangedEvent : Event<GameStateChangedEvent>
+{
+    public GameState.GameStateEnum PreviousState;
+    public GameState.GameStateEnum State;
+
+    public GameStateChangedEvent(GameState.GameStateEnum previousState, GameState.GameStateEnum state)
+    {
+        PreviousState = previousState;
+        State = state;
+    }
+}
+
+public class GameState: Singleton<GameState>
+{
+    public GameStateEnum CurrentState;
     
     private void OnEnable()
     {
-        GameEventInvoker.onStartGame += OnStartGame;
-        GameEventInvoker.onPauseGame += OnPauseGame;
-        GameEventInvoker.onUnpauseGame += OnUnpauseGame;
-        GameEventInvoker.onEndGame += OnEndGame;
+        SetGameStateEvent.AddListener(OnSetGameStateEvent);
     }
 
     private void OnDisable()
     {
-        GameEventInvoker.onStartGame -= OnStartGame;
-        GameEventInvoker.onPauseGame -= OnPauseGame;
-        GameEventInvoker.onUnpauseGame -= OnUnpauseGame;
-        GameEventInvoker.onEndGame -= OnEndGame;
+        SetGameStateEvent.RemoveListener(OnSetGameStateEvent);
     }
 
-    private void OnEndGame()
+    private void OnSetGameStateEvent(SetGameStateEvent data)
     {
-        CurrentState = GameStateEnum.InMenu;
-    }
-
-    private void OnUnpauseGame()
-    {
-        CurrentState = GameStateEnum.InProgress;
-    }
-
-    private void OnPauseGame()
-    {
-        CurrentState = GameStateEnum.Paused;
-    }
-
-    private void OnStartGame()
-    {
-        CurrentState = GameStateEnum.InProgress;
+        var prevState = CurrentState;
+        CurrentState = data.NewState;
+        new GameStateChangedEvent(prevState, CurrentState).Broadcast();
     }
 
     public enum GameStateEnum
     {
         InProgress = 0,
-        Paused = 1, 
-        InMenu = 2
+        InTerminalWindow = 1, 
+        GameOver = 2
     }
 }

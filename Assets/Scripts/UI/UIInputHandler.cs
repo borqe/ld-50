@@ -1,23 +1,23 @@
-    using UnityEngine;
+using UnityEngine;
 
-    public class UIInputHandler: MonoBehaviour
+public class UIInputHandler : MonoBehaviour
+{
+    private void Update()
     {
-        private void Update()
+        if (Input.GetKeyDown(KeyCode.Tilde))
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            switch (GameState.Instance.CurrentState)
             {
-                switch (GameState.CurrentState)
-                {
-                    case GameState.GameStateEnum.InProgress:
-                        GameEventInvoker.onPauseGame?.Invoke();
-                        break;
-                    case GameState.GameStateEnum.Paused:
-                        GameEventInvoker.onUnpauseGame?.Invoke();
-                        break;
-                    default:
-                        break;
-                }
-                return;
+                case GameState.GameStateEnum.InProgress:
+                    new SetGameStateEvent(GameState.GameStateEnum.InTerminalWindow).Broadcast();
+                    break;
+                case GameState.GameStateEnum.InTerminalWindow:
+                    new SetGameStateEvent(GameState.GameStateEnum.InProgress).Broadcast();
+                    break;
+                default:
+                    break;
             }
+            return;
         }
     }
+}

@@ -11,23 +11,25 @@ public class InGameUI: MonoBehaviour
 
     private void OnEnable()
     {
-        GameEventInvoker.onStartGame += OnGameStart;
-        GameEventInvoker.onEndGame += OnGameEnd;
+        GameStateChangedEvent.AddListener(OnGameStateChanged);
     }
 
     private void OnDisable()
     {
-        GameEventInvoker.onStartGame -= OnGameStart;
-        GameEventInvoker.onEndGame -= OnGameEnd;
+        GameStateChangedEvent.RemoveListener(OnGameStateChanged);
     }
 
-    private void OnGameEnd()
+    private void OnGameStateChanged(GameStateChangedEvent data)
     {
-        _progressSlider.SetActive(false);
+        if (data.State == GameState.GameStateEnum.InTerminalWindow)
+            ActivateProgressSlider(false);
+        else if (data.State == GameState.GameStateEnum.InProgress)
+            ActivateProgressSlider(true);
     }
 
-    private void OnGameStart()
+
+    private void ActivateProgressSlider(bool active)
     {
-        _progressSlider.SetActive(true);
+        _progressSlider.SetActive(active);
     }
 }

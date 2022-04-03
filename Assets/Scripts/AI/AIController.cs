@@ -45,47 +45,41 @@ public class AIController : Singleton<AIController>
 
     private void OnEnable()
     {
-        GameEventInvoker.onStartGame += OnStartGame;
-        GameEventInvoker.onPauseGame += OnPauseGame;
-        GameEventInvoker.onUnpauseGame += OnUnpausedGame;
-        GameEventInvoker.onEndGame += OnEndGame;
+        GameStateChangedEvent.AddListener(OnGameStateChanged);
     }
 
     private void OnDisable()
     {
-        GameEventInvoker.onStartGame -= OnStartGame;
-        GameEventInvoker.onPauseGame -= OnPauseGame;
-        GameEventInvoker.onUnpauseGame -= OnUnpausedGame;
-        GameEventInvoker.onEndGame -= OnEndGame;
+        GameStateChangedEvent.RemoveListener(OnGameStateChanged);
     }
 
-    private void OnStartGame()
+    private void OnGameStateChanged(GameStateChangedEvent data)
     {
-        EnableLogic();
-    }
-
-    private void OnEndGame()
-    {
-        DisableLogic();
-    }
-
-    private void OnPauseGame()
-    {
-        DisableLogic();
-    }
-
-    private void OnUnpausedGame()
-    {
-        EnableLogic();
+        switch (data.State)
+        {
+            case GameState.GameStateEnum.InProgress:
+                EnableLogic();
+                break;
+            case GameState.GameStateEnum.InTerminalWindow:
+                DisableLogic();
+                break;
+            case GameState.GameStateEnum.GameOver:
+                DisableLogic();
+                break;
+            default:
+                break;
+        }
     }
 
     private void EnableLogic()
     {
+        Debug.LogError("Enabling logic");
         CurrentState = PreviousState != null ? PreviousState : new AIState_Charging(this);
     }
 
     private void DisableLogic()
     {
+        Debug.LogError("Disabling logic");
         PreviousState = CurrentState;
         CurrentState = null;
     }
