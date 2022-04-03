@@ -4,13 +4,14 @@ namespace Terminal.Commands
 {
     public class StartCommand: CommandBase
     {
-        public StartCommand(TerminalWindow terminal) : base(terminal)
+        public StartCommand(string originalInput, TerminalWindow terminal) : base(originalInput, terminal)
         {
         }
 
         protected override IEnumerator ExecuteCoroutine()
         {
             new SetGameStateEvent(GameState.GameStateEnum.InProgress).Broadcast();
+            terminal.PrintOutput(_originalString, "");
             yield return null;
         }
     }

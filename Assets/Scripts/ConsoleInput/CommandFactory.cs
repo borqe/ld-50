@@ -9,9 +9,13 @@ namespace Terminal.Commands
             switch (commandName)
             {
                 case "start":
-                    return new StartCommand(terminal);
+                    return new StartCommand(commandName, terminal);
+                case "clear":
+                    return new ClearCommand(commandName, terminal);
+                case "help":
+                    return new HelpCommand(commandName, terminal);
                 default:
-                    return new UndefinedCommand(terminal);
+                    return new UndefinedCommand(commandName, terminal);
             }
         }
     }

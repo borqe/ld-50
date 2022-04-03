@@ -1,0 +1,22 @@
+{
+  "data": {
+    "clear": {
+      "name": "clear",
+      "outputs": {
+        "l": "haha lol"
+      }
+    },
+    "help": {
+      "name": "help",
+      "outputs": {
+        "default": "Available commands:\n---\nclear - clears the terminal window\nstart - starts the AI sequence [START GAME]\n"
+      }
+    },
+    "undefined": {
+      "name": "undefined",
+      "outputs": {
+        "default": "command '{0}' not found. For a full list of available commands, use 'help'"
+      }
+    }
+  }
+}

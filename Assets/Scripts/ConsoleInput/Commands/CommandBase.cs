@@ -9,10 +9,12 @@ namespace Terminal.Commands
         // MonoBehaviour is for coroutine execution
         protected TerminalWindow terminal;
         protected CommandData _data;
+        protected string _originalString;
         
-        public CommandBase(TerminalWindow terminal)
+        public CommandBase(string originalInput, TerminalWindow terminal)
         {
             this.terminal = terminal;
+            this._originalString = originalInput;
         }
 
         public void Execute()
