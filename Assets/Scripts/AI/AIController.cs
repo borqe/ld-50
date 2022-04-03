@@ -108,6 +108,10 @@ public class AIController : Singleton<AIController>
                 DisableLogic();
                 ClearCaches();
                 break;
+            case GameState.GameStateEnum.GameNotStarted:
+                DisableLogic();
+                ClearCaches();
+                break;
             default:
                 Debug.LogError($"Not implemented: {data.State}");
                 break;

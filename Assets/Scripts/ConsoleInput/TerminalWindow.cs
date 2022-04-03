@@ -56,6 +56,10 @@ public class TerminalWindow : MonoBehaviour
             case GameState.GameStateEnum.GameOver:
                 OpenTerminal();
                 break;
+            case GameState.GameStateEnum.GameNotStarted:
+                OpenTerminal();
+                Reset();
+                break;
             default:
                 break;
         }
@@ -106,20 +110,9 @@ public class TerminalWindow : MonoBehaviour
         _terminalUser.text = userString + "~ ";
     }
 
-    private void StartGame()
-    {
-        Debug.Log("start game");
-    }
-
-    private void StartLoginSequence()
-    {
-        Debug.Log("start login");
-    }
-
     public void CloseTerminal()
     {
         _terminalGameObject.SetActive(false);
-        // print out the "are you sure", then wait for y/n
     }
 
     public void OpenTerminal()
@@ -130,6 +123,7 @@ public class TerminalWindow : MonoBehaviour
 
     public void PrintOutput(string command, string output, bool printUser = true)
     {
+        output = output.Replace("{AI}", _settings.AIString.Replace("~ ", ""));
         if (printUser)
         {
             string originalLine = _consoleOutput.text + _terminalUser.text + command + Environment.NewLine;
@@ -222,5 +216,13 @@ public class TerminalWindow : MonoBehaviour
         {
             _eventSystem.SetSelectedGameObject(_terminalInput.gameObject);
         }
+    }
+
+    public void Reset()
+    {
+        _terminalGameObject.SetActive(true);
+        ShowUser();
+        UpdateUser(_settings.UserString);
+        ClearOutput();
     }
 }

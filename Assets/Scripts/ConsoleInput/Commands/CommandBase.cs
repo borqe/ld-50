@@ -25,7 +25,8 @@ namespace Terminal.Commands
 
         public void Respond(string response)
         {
-            _lastResponse = response;
+            char[] charsToTrim = { ' ' };
+            _lastResponse = response.ToLower().TrimEnd(charsToTrim);
         }
 
         protected abstract IEnumerator ExecuteCoroutine();
