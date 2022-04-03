@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.WSA;
 
 public class TerminalWindow : MonoBehaviour
 {
@@ -140,6 +141,54 @@ public class TerminalWindow : MonoBehaviour
         }
         _terminalInput.text = "";
         ResetPosition();
+    }
+
+    public void PrintOutputTyped(string output, float speed, Action callback)
+    {
+        StartCoroutine(PrintOutputTypedCoroutine(output, speed, callback));
+    }
+
+    private IEnumerator PrintOutputTypedCoroutine(string output, float speed, Action callback)
+    {
+        WaitForSeconds wait = new WaitForSeconds(speed);
+        var lines = output.Split("\n");
+        
+        for (int i = 0; i < lines.Length; i++)
+        {
+            _consoleOutput.text = _consoleOutput.text + _settings.AIString;
+            yield return StartCoroutine(LoadingCoroutine(1.0f));
+            var line = lines[i].ToCharArray();
+
+            for (int j = 0; j < line.Length; j++)
+            {
+                _consoleOutput.text += line[j];
+                yield return wait;
+            }
+            _consoleOutput.text += Environment.NewLine;
+        }
+        _consoleOutput.text += Environment.NewLine;
+        yield return null;
+        callback.Invoke();
+    }
+
+    private IEnumerator LoadingCoroutine(float timeToSpin)
+    {
+        string[] chars = new string[] {"-", "\\", "|", "/"};
+        float spinningTime = 0.0f;
+        WaitForSeconds wait = new WaitForSeconds(0.1f);
+        
+        while (timeToSpin > spinningTime)
+        {
+            for (int i = 0; i < chars.Length; i++)
+            {
+                _consoleOutput.text += chars[i];
+                yield return wait;
+                _consoleOutput.text = _consoleOutput.text.Substring(0,_consoleOutput.text.Length - 1);
+                spinningTime += 0.1f;
+            }
+        }
+
+        yield return null;
     }
 
     public void HideUser()

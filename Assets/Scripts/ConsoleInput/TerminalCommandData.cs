@@ -29,6 +29,9 @@ namespace ConsoleInput
             storage.Data.Add("clear", data);
             File.WriteAllText("Assets/Resources/Commands/commandData.json", JsonConvert.SerializeObject(storage));
         }
+
+        public static string ConfirmationMessage => Commands.Data["confirmation"].outputs["default"];
+        public static string BadConfirmationResponseMessage => Commands.Data["confirmation"].outputs["bad_response"];
     }
     
     [System.Serializable]

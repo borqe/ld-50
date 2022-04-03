@@ -15,12 +15,19 @@
     "quit": {
       "name": "quit",
       "outputs": {
-        "default": "Terminate session. This will leave the AI unsupervised.\nDo you want to continue? [y/n]\n",
-        "y": "{0}: Sure, I'll just take over the whole internet real quick. :P\n",
-        "n": "{0}: So you want to continue the misery of yours? Fine. Suit yourself.\n",
+        "default": "Terminate session. This will leave the AI unsupervised.\n",
+        "y": "Sure, I'll just take over the whole internet real quick. :P",
+        "n": "So you want to continue the misery of yours? Fine. Suit yourself.\nIt won't take long."
+      }
+    },
+    "confirmation": {
+      "name": "confirmation",
+      "outputs": {
+        "default": "Do you want to continue? [y/n]\n",
         "bad_response": "Unrecognized input. The value must be y or n.\nDo you want to continue? [y/n]\n"
       }
     },
+    
     "undefined": {
       "name": "undefined",
       "outputs": {

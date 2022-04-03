@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ConsoleSettings
   m_EditorClassIdentifier: 
   UserString: Intern@CERN
-  AIString: NaTA
+  AIString: 'NaTA~ '

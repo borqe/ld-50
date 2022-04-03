@@ -23,6 +23,7 @@ namespace Terminal.Commands
         {
             _lastResponse = "";
             terminal.PrintOutput(_originalString, _data.outputs["default"]);
+            terminal.PrintOutput("", TerminalCommandData.ConfirmationMessage, false);
 
             while (true)
             {
@@ -32,7 +33,12 @@ namespace Terminal.Commands
                 if (_lastResponse.ToLower() == Response.No)
                 {
                     terminal.PrintOutput(_lastResponse, "");
-                    terminal.PrintOutput("", _data.outputs["n"], false);
+                    bool continueOutput = false;
+                    terminal.PrintOutputTyped(_data.outputs["n"], 0.05f, () =>
+                    {
+                        continueOutput = true;
+                    });
+                    yield return new WaitUntil(() => continueOutput);
                     terminal.ShowUser();
                     terminal.ClearLastCommand();
                     yield break;
@@ -40,6 +46,12 @@ namespace Terminal.Commands
                 else if (_lastResponse.ToLower() == Response.Yes)
                 {
                     terminal.PrintOutput(_lastResponse, "");
+                    bool continueOutput = false;
+                    terminal.PrintOutputTyped(_data.outputs["y"], 0.05f,
+                    () => {
+                        continueOutput = true;
+                    });
+                    yield return new WaitUntil(() => continueOutput);
                     terminal.PrintOutput("", "Time until shutdown: 5", false);
                     yield return new WaitForSeconds(1.0f);
                     terminal.PrintOutput("", "Time until shutdown: 4", false);
@@ -63,7 +75,7 @@ namespace Terminal.Commands
                 else
                 {
                     terminal.PrintOutput(_lastResponse, "");
-                    terminal.PrintOutput("", _data.outputs["bad_response"], false);
+                    terminal.PrintOutput("", TerminalCommandData.BadConfirmationResponseMessage, false);
                     terminal.ShowUser();
                 }
 
