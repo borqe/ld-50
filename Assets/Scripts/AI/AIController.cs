@@ -12,6 +12,8 @@ public enum AIStateType
 { 
     Idle,
     TransferingData,
+    Confused,
+    Scared,
 }
 
 public class AIStateChangedEvent : Event<AIStateChangedEvent>
@@ -21,6 +23,16 @@ public class AIStateChangedEvent : Event<AIStateChangedEvent>
     public AIStateChangedEvent(AIStateType state)
     {
         State = state;
+    }
+}
+
+public class SetAIStateEvent : Event<SetAIStateEvent>
+{
+    public AIStateType NewState;
+
+    public SetAIStateEvent(AIStateType newState)
+    {
+        NewState = newState;
     }
 }
 
@@ -43,6 +55,7 @@ public class AIController : Singleton<AIController>
 
     public AIData AIData { get; private set; }
     public List<Cable> ConnectedCables { get; private set; }
+    public List<AIState_Charging.ConnectingCable> ConnectingCables { get; private set; }
     public List<Console> Consoles { get; private set; }
 
     private AIState PreviousState;
@@ -52,6 +65,7 @@ public class AIController : Singleton<AIController>
     {
         AIData = new AIData();
         ConnectedCables = new List<Cable>();
+        ConnectingCables = new List<AIState_Charging.ConnectingCable>();
         Consoles = new List<Console>();
         DisableLogic();
     }
@@ -64,11 +78,13 @@ public class AIController : Singleton<AIController>
     private void OnEnable()
     {
         GameStateChangedEvent.AddListener(OnGameStateChanged);
+        SetAIStateEvent.AddListener(OnSetAIState);
     }
 
     private void OnDisable()
     {
         GameStateChangedEvent.RemoveListener(OnGameStateChanged);
+        SetAIStateEvent.RemoveListener(OnSetAIState);
     }
 
     private void OnGameStateChanged(GameStateChangedEvent data)
@@ -85,6 +101,29 @@ public class AIController : Singleton<AIController>
                 DisableLogic();
                 break;
             default:
+                Debug.LogError($"Not implemented: {data.State}");
+                break;
+        }
+    }
+
+    private void OnSetAIState(SetAIStateEvent data)
+    {
+        switch (data.NewState)
+        {
+            case AIStateType.Idle:
+                CurrentState = new AIState_Idle(this);
+                break;
+            case AIStateType.TransferingData:
+                CurrentState = new AIState_Charging(this);
+                break;
+            case AIStateType.Confused:
+                CurrentState = new AIState_Confused(this, AIStateType.TransferingData);
+                break;
+            case AIStateType.Scared:
+                CurrentState = new AIState_Scared(this);
+                break;
+            default:
+                Debug.LogError($"Not implemented: {data.NewState}");
                 break;
         }
     }

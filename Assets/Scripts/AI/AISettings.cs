@@ -10,6 +10,8 @@ public class AISettings : ScriptableObject
 
     public AIState_Idle.Settings StartingSettings;
     public AIState_Charging.Settings ChargingSettings;
+    public AIState_Confused.Settings ConfusedSettings;
+    public AIState_Scared.Settings ScaredSettings;
 
 
 }

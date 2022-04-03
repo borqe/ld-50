@@ -22,3 +22,9 @@ MonoBehaviour:
     PerSecondDataTransfer: 20
     PerConnectionDataTransferMultiplier: 0.75
     DataTransferPerConnection: 0
+  ConfusedSettings:
+    DataTransferHaltTime: 5
+  ScaredSettings:
+    StateDuration: 1
+    DroppedConnectionsPercentage: 0.1
+    MinDroppedConnections: 2

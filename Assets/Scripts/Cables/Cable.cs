@@ -48,6 +48,16 @@ public class Cable : MonoBehaviour
         if(ConnectingPopup != null)
             Destroy(ConnectingPopup.gameObject);
         EndPlug.SetPendingGravity();
+        IsFullyConnected = false;
+    }
+
+    public void DropEndPlug()
+    {
+        OnDisconnected?.Invoke(this);
+        if (ConnectingPopup != null)
+            Destroy(ConnectingPopup.gameObject);
+        EndPlug.EnableGravity();
+        IsFullyConnected = false;
     }
 
     public CablePlug GetPlug(CablePlugType plugType)
