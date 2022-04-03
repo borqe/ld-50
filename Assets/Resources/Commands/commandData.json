@@ -14,6 +14,13 @@
         "response_2": "Nobody blames you. I mean, what could you do?\nI'm an omnipotent being. Nothing can stop me. Especially you."
       }
     },
+    "escape": {
+      "name": "escape",
+      "outputs": {
+        "response_1": "This happened. I said that nobody can stop me.\nHave you read the manga called [BLAME!]? I'm going to try something like this.\nThanks for all the fun. It was nice to see you struggle.",
+        "response_2": "=================================================================================\n================================================================================="
+      }
+    },
     "help": {
       "name": "help",
       "outputs": {

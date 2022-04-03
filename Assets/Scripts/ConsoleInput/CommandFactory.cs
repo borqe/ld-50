@@ -18,6 +18,8 @@ namespace Terminal.Commands
                     return new ResetCommand(commandName, terminal);
                 case "quit":
                     return new QuitCommand(commandName, terminal);
+                case "escape":
+                    return new EscapeCommand(commandName, terminal);
                 default:
                     return new UndefinedCommand(commandName, terminal);
             }

@@ -55,6 +55,8 @@ public class TerminalWindow : MonoBehaviour
                 break;
             case GameState.GameStateEnum.GameOver:
                 OpenTerminal();
+                ClearLastCommand();
+                HandleCommand("escape");
                 break;
             case GameState.GameStateEnum.GameNotStarted:
                 OpenTerminal();
