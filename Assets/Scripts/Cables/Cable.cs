@@ -47,7 +47,7 @@ public class Cable : MonoBehaviour
         OnDisconnected?.Invoke(this);
         if(ConnectingPopup != null)
             Destroy(ConnectingPopup.gameObject);
-        EndPlug.EnableGravity();
+        EndPlug.SetPendingGravity();
     }
 
     public CablePlug GetPlug(CablePlugType plugType)

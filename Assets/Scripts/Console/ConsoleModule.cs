@@ -49,7 +49,7 @@ public class ConsoleModule : MonoBehaviour
         if (plug == null)
             return;
 
-        if (ConnectedCablePlug != null)
+        if (ConnectedCablePlug != null || !plug.CollisionEnabled)
             return;
 
         ConnectedCablePlug = plug;

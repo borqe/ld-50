@@ -7,7 +7,6 @@ public abstract class AIState
     protected AIController AIController;
     public AIState(AIController controller)
     {
-        Debug.LogError($"Entering {this.GetType().Name} state");
         AIController = controller;
         Construct();
     }

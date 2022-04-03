@@ -8,6 +8,8 @@ public enum CablePlugType { Start = 0, End = 2 }
 public class CablePlug : MonoBehaviour
 {
     public bool CanBeMoved { get; private set; } = true;
+    public bool PendingGravity { get; private set; } = false;
+    public bool CollisionEnabled { get; private set; } = true;
 
     private Action<CablePlug> OnPositionChanged;
 
@@ -17,6 +19,8 @@ public class CablePlug : MonoBehaviour
     private Vector3 DragOffset;
 
     private ConsoleModule ConsoleToSnapTo;
+
+    private Vector3 FakeVelocityCache;
 
     public void Setup(Vector3 position, bool canBeMoved, Action<CablePlug> onPositionChanged = null)
     {
@@ -42,6 +46,11 @@ public class CablePlug : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (PendingGravity)
+        {
+            EnableGravity();
+        }
+        
         if (!CanBeMoved)
             return;
 
@@ -69,12 +78,21 @@ public class CablePlug : MonoBehaviour
 
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, OnMouseDownScreenPoint.z);
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + DragOffset;
+
         transform.position = curPosition;
     }
 
-    public void EnableGravity()
+    public void SetPendingGravity()
     {
-        GetComponent<Rigidbody>().useGravity = true;
+        PendingGravity = true;
+        CollisionEnabled = false;
+    }
+
+    private void EnableGravity()
+    {
+        Rigidbody r = GetComponent<Rigidbody>();
+        r.useGravity = true;
+        r.velocity = FakeVelocityCache * 15f;
         BoxCollider bc = GetComponent<BoxCollider>();
         bc.isTrigger = false;
         CanBeMoved = false;
@@ -86,6 +104,7 @@ public class CablePlug : MonoBehaviour
         float deltaMagnitudeSqr = delta.sqrMagnitude;
         if (deltaMagnitudeSqr > MinDraggingUpdateMagnitude)
         {
+            FakeVelocityCache = transform.position - LastUpdatePosition;
             LastUpdatePosition = transform.position;
             OnPositionChanged?.Invoke(this);
         }

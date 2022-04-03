@@ -73,13 +73,11 @@ public class AIController : Singleton<AIController>
 
     private void EnableLogic()
     {
-        Debug.LogError("Enabling logic");
         CurrentState = PreviousState != null ? PreviousState : new AIState_Charging(this);
     }
 
     private void DisableLogic()
     {
-        Debug.LogError("Disabling logic");
         PreviousState = CurrentState;
         CurrentState = null;
     }

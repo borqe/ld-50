@@ -77,7 +77,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4571240898815815162}
   - component: {fileID: 7977112064860731024}
-  - component: {fileID: 3813382730402153679}
   - component: {fileID: 9071692060132214249}
   m_Layer: 0
   m_Name: UI
@@ -119,24 +118,8 @@ MonoBehaviour:
   _overlayCanvas: {fileID: 8986606090225272564}
   _worldCanvas: {fileID: 6043971038092445878}
   _inGameUI: {fileID: 2023069717893720278}
-  _pauseUI: {fileID: 0}
-  _startUI: {fileID: 0}
   _popupPrefab: {fileID: 7146650300674314695, guid: 0e93c028938184530b71fe98fbbc402b,
     type: 3}
---- !u!114 &3813382730402153679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7563847707831323635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6642c348d37942529f5bba430efe679, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  progress: 29.3
-  _consoleModules: []
 --- !u!114 &9071692060132214249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,6 +408,11 @@ PrefabInstance:
     - target: {fileID: 5994247175142067232, guid: 1424ac8484e0049b39be7ef8d555b057,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994247175142067232, guid: 1424ac8484e0049b39be7ef8d555b057,
+        type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6020860764197061989, guid: 1424ac8484e0049b39be7ef8d555b057,
