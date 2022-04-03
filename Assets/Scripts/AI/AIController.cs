@@ -56,6 +56,7 @@ public class AIController : Singleton<AIController>
     public AIData AIData { get; private set; }
     public List<Cable> ConnectedCables { get; private set; }
     public List<AIState_Charging.ConnectingCable> ConnectingCables { get; private set; }
+    public List<Cable> DisconnectedCables { get; private set; }
     public List<Console> Consoles { get; private set; }
 
     private AIState PreviousState;
@@ -67,12 +68,18 @@ public class AIController : Singleton<AIController>
         ConnectedCables = new List<Cable>();
         ConnectingCables = new List<AIState_Charging.ConnectingCable>();
         Consoles = new List<Console>();
+        DisconnectedCables = new List<Cable>();
         DisableLogic();
     }
 
     public void NewConsoleSpawned(Console console)
     {
         Consoles.Add(console);
+    }
+
+    public void RemoveConsole(Console console)
+    {
+        Consoles.Remove(console);
     }
 
     private void OnEnable()
@@ -99,11 +106,39 @@ public class AIController : Singleton<AIController>
                 break;
             case GameState.GameStateEnum.GameOver:
                 DisableLogic();
+                ClearCaches();
                 break;
             default:
                 Debug.LogError($"Not implemented: {data.State}");
                 break;
         }
+    }
+
+    private void ClearCaches()
+    {
+        PreviousState = null;
+        CurrentState = null;
+        Consoles.Clear();
+
+        while (ConnectedCables.Count != 0)
+        {
+            var c = ConnectedCables.Last();
+            ConnectedCables.Remove(c);
+            Destroy(c.gameObject);
+        }
+        while (ConnectingCables.Count != 0)
+        {
+            var c = ConnectingCables.Last();
+            ConnectingCables.Remove(c);
+            Destroy(c.Cable.gameObject);
+        } 
+        while (DisconnectedCables.Count != 0)
+        {
+            var c = DisconnectedCables.Last();
+            DisconnectedCables.Remove(c);
+            Destroy(c.gameObject);
+        }
+        AIData = new AIData();
     }
 
     private void OnSetAIState(SetAIStateEvent data)
@@ -141,6 +176,9 @@ public class AIController : Singleton<AIController>
 
     private void Update()
     {
+        if (GameState.Instance.CurrentState == GameState.GameStateEnum.GameOver || GameState.Instance.CurrentState == GameState.GameStateEnum.GameNotStarted)
+            return;
+
         if (CurrentState != null)
             CurrentState.Update();
     }
@@ -179,5 +217,6 @@ public class AIController : Singleton<AIController>
     public void CableDisconnected(Cable cable)
     {
         ConnectedCables.Remove(cable);
+        DisconnectedCables.Add(cable);
     }
 }

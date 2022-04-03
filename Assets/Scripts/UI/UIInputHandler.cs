@@ -19,5 +19,11 @@ public class UIInputHandler : MonoBehaviour
             }
             return;
         }
+
+        //if (Input.GetKeyDown(KeyCode.C))
+        //    new SetAIStateEvent(AIStateType.Confused).Broadcast();
+        //if(Input.GetKeyDown(KeyCode.S))
+        //    new SetAIStateEvent(AIStateType.Scared).Broadcast();
+
     }
 }

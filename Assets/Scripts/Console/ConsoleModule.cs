@@ -19,6 +19,7 @@ public class ConsoleModule : MonoBehaviour
 
     public CablePlug ConnectedCablePlug { get; private set; }
     private const string CablePlugTag = "CablePlug";
+    private bool IsBeingConnectedTo;
 
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class ConsoleModule : MonoBehaviour
         MeshRenderer.material = DisconnectedMaterial;
         ConnectedCablePlug.CancelSnapping();
         OnCableDisconnected?.Invoke();
+        IsBeingConnectedTo = false;
     }
 
     public void InitiallyConnected()
@@ -38,6 +40,12 @@ public class ConsoleModule : MonoBehaviour
         MeshRenderer.material = ConnectedMaterial;
         ConnectedCablePlug.SnapToOnEndMouseDrag(this);
         OnCableInitiallyConnected?.Invoke();
+        IsBeingConnectedTo = true;
+    }
+
+    public bool IsConnectedOrBeingConnectedTo()
+    {
+        return ConnectedCablePlug != null && !IsBeingConnectedTo;
     }
 
     private void OnTriggerEnter(Collider other)

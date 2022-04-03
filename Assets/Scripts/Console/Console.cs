@@ -11,6 +11,11 @@ public class Console : MonoBehaviour
         AIController.Instance.NewConsoleSpawned(this);
     }
 
+    private void OnDestroy()
+    {
+        AIController.Instance.RemoveConsole(this);
+    }
+
     public ConsoleModule GetRandomModule()
     {
         return Modules.GetRandomInList();
