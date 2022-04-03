@@ -1,10 +1,10 @@
 using UnityEngine;
 
-namespace ConsoleInput.Commands
+namespace Terminal.Commands
 {
     public static class CommandFactory
     {
-        public static CommandBase GetCommand(string commandName, ConsoleWindow terminal)
+        public static CommandBase GetCommand(string commandName, TerminalWindow terminal)
         {
             switch (commandName)
             {

@@ -1,11 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-namespace ConsoleInput.Commands
+namespace Terminal.Commands
 {
     public class ClearCommand: CommandBase
     {
-        public ClearCommand(ConsoleWindow console) : base(console)
+        public ClearCommand(TerminalWindow terminal) : base(terminal)
         {
         }
 

@@ -1,10 +1,10 @@
 using System.Collections;
 
-namespace ConsoleInput.Commands
+namespace Terminal.Commands
 {
     public class StartCommand: CommandBase
     {
-        public StartCommand(ConsoleWindow console) : base(console)
+        public StartCommand(TerminalWindow terminal) : base(terminal)
         {
         }
 

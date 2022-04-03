@@ -1,22 +1,19 @@
 using System;
 using System.Collections;
-using ConsoleInput;
-using ConsoleInput.Commands;
+using Terminal.Commands;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ConsoleWindow : MonoBehaviour
+public class TerminalWindow : MonoBehaviour
 {
-    [SerializeField] private ConsoleCommands commands;
-
     [Header("UI Stuff")]
-    [SerializeField] private TMP_InputField _consoleInput;
+    [SerializeField] private TMP_InputField _terminalInput;
     [SerializeField] private TMP_Text _consoleOutput;
-    [SerializeField] private TMP_Text _consoleHandle;
-    [SerializeField] private TMP_Text _consoleUser;
-    [SerializeField] private ConsoleSettings _settings;
+    [SerializeField] private TMP_Text _terminalHandle;
+    [SerializeField] private TMP_Text _terminalUser;
+    [SerializeField] private TerminalSettings _settings;
     [SerializeField] private ScrollRect _scrollRect;
 
     private EventSystem _eventSystem;
@@ -28,8 +25,8 @@ public class ConsoleWindow : MonoBehaviour
 
     private void OnEnable()
     {
-        _consoleInput.onSubmit.AddListener(OnConsoleSubmit);
-        _eventSystem.SetSelectedGameObject(_consoleInput.gameObject);
+        _terminalInput.onSubmit.AddListener(OnTerminalSubmit);
+        _eventSystem.SetSelectedGameObject(_terminalInput.gameObject);
         
         UpdateUser(_settings.UserString);
         
@@ -43,7 +40,7 @@ public class ConsoleWindow : MonoBehaviour
             case GameState.GameStateEnum.InTerminalWindow:
                 break;
             case GameState.GameStateEnum.InProgress:
-                CloseConsole();
+                CloseTerminal();
                 break;
             case GameState.GameStateEnum.GameOver:
                 break;
@@ -57,7 +54,7 @@ public class ConsoleWindow : MonoBehaviour
         StartCoroutine(ResetPositionCoroutine());
     }
 
-    private void OnConsoleSubmit(string arg0)
+    private void OnTerminalSubmit(string arg0)
     {
         HandleCommand(arg0);
     }
@@ -100,8 +97,8 @@ public class ConsoleWindow : MonoBehaviour
 
     public void UpdateUser(string userString)
     {
-        _consoleHandle.text = userString + "/ Terminal";
-        _consoleUser.text = userString + "~ ";
+        _terminalHandle.text = userString + "/ Terminal";
+        _terminalUser.text = userString + "~ ";
     }
 
     private void StartGame()
@@ -114,24 +111,29 @@ public class ConsoleWindow : MonoBehaviour
         Debug.Log("start login");
     }
 
-    public void CloseConsole()
+    public void CloseTerminal()
     {
         gameObject.SetActive(false);
         // print out the "are you sure", then wait for y/n
     }
 
+    public void OpenTerminal()
+    {
+        gameObject.SetActive(true);
+    }
+
     public void PrintOutput(string command, string output)
     {
-        string originalLine = _consoleOutput.text + _consoleUser.text + command + Environment.NewLine;
+        string originalLine = _consoleOutput.text + _terminalUser.text + command + Environment.NewLine;
         _consoleOutput.text = originalLine + output.Replace("\\n", Environment.NewLine);
-        _consoleInput.text = "";
+        _terminalInput.text = "";
         ResetPosition();
     }
 
     private void ClearOutput()
     {
         _consoleOutput.text = "";
-        _consoleInput.text = "";
+        _terminalInput.text = "";
         ResetPosition();
     }
 
@@ -141,6 +143,6 @@ public class ConsoleWindow : MonoBehaviour
         yield return null;
         _scrollRect.verticalScrollbar.value = 0f;
         _eventSystem.SetSelectedGameObject(null);
-        _eventSystem.SetSelectedGameObject(_consoleInput.gameObject);
+        _eventSystem.SetSelectedGameObject(_terminalInput.gameObject);
     }
 }

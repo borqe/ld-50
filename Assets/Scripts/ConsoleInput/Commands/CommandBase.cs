@@ -1,22 +1,23 @@
 using System.Collections;
+using ConsoleInput;
 using UnityEngine;
 
-namespace ConsoleInput.Commands
+namespace Terminal.Commands
 {
     public abstract class CommandBase
     {
         // MonoBehaviour is for coroutine execution
-        protected ConsoleWindow _console;
+        protected TerminalWindow terminal;
         protected CommandData _data;
         
-        public CommandBase(ConsoleWindow console)
+        public CommandBase(TerminalWindow terminal)
         {
-            _console = console;
+            this.terminal = terminal;
         }
 
         public void Execute()
         {
-            _console?.StartCoroutine(ExecuteCoroutine());
+            terminal?.StartCoroutine(ExecuteCoroutine());
         }
 
         protected abstract IEnumerator ExecuteCoroutine();

@@ -1,17 +1,17 @@
 using System.Collections;
 using UnityEngine;
 
-namespace ConsoleInput.Commands
+namespace Terminal.Commands
 {
     public class UndefinedCommand: CommandBase
     {
-        public UndefinedCommand(ConsoleWindow console) : base(console)
+        public UndefinedCommand(TerminalWindow terminal) : base(terminal)
         {
         }
 
         protected override IEnumerator ExecuteCoroutine()
         {
-            _console.PrintOutput(_data.name, _data.outputs["default"]);
+            terminal.PrintOutput(_data.name, _data.outputs["default"]);
             yield return null;
         }
     }

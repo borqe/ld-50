@@ -5,12 +5,12 @@ namespace ConsoleInput
 {
     public static class TerminalCommandData
     {
-        public static TerminalCommands Data = new TerminalCommands();
+        public static TerminalCommandStorage Data = new TerminalCommandStorage();
 
         public static void ReadFromFile()
         {
             var jsonTextFile = Resources.Load<TextAsset>("Commands/commandJson");
-            TerminalCommands Data = JsonUtility.FromJson<TerminalCommands>(jsonTextFile.text);
+            TerminalCommandStorage Data = JsonUtility.FromJson<TerminalCommandStorage>(jsonTextFile.text);
         }
     }
     
@@ -26,7 +26,7 @@ namespace ConsoleInput
     }
 
     [System.Serializable]
-    public class TerminalCommands
+    public class TerminalCommandStorage
     {
         public Dictionary<string, CommandData> Data = new Dictionary<string, CommandData>();
     }

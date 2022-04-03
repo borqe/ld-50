@@ -4,9 +4,9 @@ using UnityEngine;
 namespace ConsoleInput
 {
     [CreateAssetMenu(fileName = "ConsoleCommands", menuName = "ConsoleCommands", order = 0)]
-    public class ConsoleCommands : ScriptableObject
+    public class TerminalCommands : ScriptableObject
     {
-        public List<ConsoleCommand> commands = new List<ConsoleCommand>();
+        public List<TerminalCommand> commands = new List<TerminalCommand>();
         public Dictionary<string, string> commandDictionary = new Dictionary<string, string>();
 
         private void OnEnable()
@@ -19,7 +19,7 @@ namespace ConsoleInput
     }
 
     [System.Serializable]
-    public class ConsoleCommand
+    public class TerminalCommand
     {
         public string commandName;
         [TextArea(3, 15)]
