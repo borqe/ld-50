@@ -21,8 +21,7 @@ public class AIState_Idle : AIState
 
     protected override void Construct()
     {
-        if(!SupressEvent)
-            AIController.OnAIStateChanged?.Invoke(AIStateType.Idle);
+        new AIStateChangedEvent(AIStateType.Idle).Broadcast();
     }
 
     public override void Update()

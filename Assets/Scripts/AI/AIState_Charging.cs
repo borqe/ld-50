@@ -44,7 +44,7 @@ public class AIState_Charging : AIState
     {
         ConnectingCables = new List<ConnectingCable>();
         NextCableConnectionIn = 0;
-        AIController.OnAIStateChanged?.Invoke(AIStateType.TransferingData);
+        new AIStateChangedEvent(AIStateType.TransferingData).Broadcast();
     }
 
     public override void Update()

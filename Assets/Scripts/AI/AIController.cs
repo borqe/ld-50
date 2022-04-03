@@ -14,6 +14,28 @@ public enum AIStateType
     TransferingData,
 }
 
+public class AIStateChangedEvent : Event<AIStateChangedEvent>
+{
+    public AIStateType State;
+
+    public AIStateChangedEvent(AIStateType state)
+    {
+        State = state;
+    }
+}
+
+public class AIDataTransferedEvent : Event<AIDataTransferedEvent>
+{
+    public float TotalDataTransfered;
+    public float MaxData;
+
+    public AIDataTransferedEvent(float totalDataTransfered, float maxData)
+    {
+        TotalDataTransfered = totalDataTransfered;
+        MaxData = maxData;
+    }
+}
+
 public class AIController : Singleton<AIController>
 {
     [SerializeField] private AISettings AISettings;
@@ -25,10 +47,6 @@ public class AIController : Singleton<AIController>
 
     private AIState PreviousState;
     private AIState CurrentState;
-
-    public Action<float> OnDataTransferedChanged;
-    public Action OnDataTransferFull;
-    public Action<AIStateType> OnAIStateChanged;
 
     private void Awake()
     {
@@ -107,7 +125,7 @@ public class AIController : Singleton<AIController>
     public void AddDataTransfer(float value)
     {
         AIData.DataTransfered += value;
-        OnDataTransferedChanged?.Invoke(AIData.DataTransfered / 10f);
+        new AIDataTransferedEvent(AIData.DataTransfered, Settings.MaxCharge).Broadcast();
 
         if (AIData.DataTransfered >= Settings.MaxCharge)
             GameOver();
@@ -115,7 +133,7 @@ public class AIController : Singleton<AIController>
 
     public void GameOver()
     {
-        OnDataTransferFull?.Invoke();
+        new SetGameStateEvent(GameState.GameStateEnum.GameOver).Broadcast();
         CurrentState = new AIState_Idle(this, supressEvent: true);
     }
 

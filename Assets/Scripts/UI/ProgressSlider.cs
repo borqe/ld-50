@@ -14,14 +14,24 @@ public class ProgressSlider : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Refresh(0);
+    }
+
     private void OnEnable()
     {
-        AIController.Instance.OnDataTransferedChanged += Refresh;
+        AIDataTransferedEvent.AddListener(OnAIDataTransfered);
     }
 
     private void OnDisable()
     {
-        AIController.Instance.OnDataTransferedChanged -= Refresh;
+        AIDataTransferedEvent.RemoveListener(OnAIDataTransfered);
+    }
+
+    private void OnAIDataTransfered(AIDataTransferedEvent data)
+    {
+        Refresh((data.TotalDataTransfered / data.MaxData) * 100f);
     }
 
     [ExecuteAlways]
