@@ -48,6 +48,7 @@ public class GameState: Singleton<GameState>
     {
         InProgress = 0,
         InTerminalWindow = 1, 
-        GameOver = 2
+        GameOver = 2,
+        GameNotStarted = 3,
     }
 }
