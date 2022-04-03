@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using ConsoleInput;
+using ConsoleInput.Commands;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -31,6 +32,24 @@ public class ConsoleWindow : MonoBehaviour
         _eventSystem.SetSelectedGameObject(_consoleInput.gameObject);
         
         UpdateUser(_settings.UserString);
+        
+        GameStateChangedEvent.AddListener(OnGameStateChanged);
+    }
+
+    private void OnGameStateChanged(GameStateChangedEvent eventData)
+    {
+        switch (eventData.State)
+        {
+            case GameState.GameStateEnum.InTerminalWindow:
+                break;
+            case GameState.GameStateEnum.InProgress:
+                CloseConsole();
+                break;
+            case GameState.GameStateEnum.GameOver:
+                break;
+            default:
+                break;
+        }
     }
     
     public void ResetPosition()
@@ -43,30 +62,40 @@ public class ConsoleWindow : MonoBehaviour
         HandleCommand(arg0);
     }
 
+    public void MaximizeWindow()
+    {
+    }
+
+    public void MinimizeWindow()
+    {
+        
+    }
+
     private void HandleCommand(string command)
     {
-        if (commands.commandDictionary.ContainsKey(command))
-        {
-            switch (command)
-            {
-                case "clear":
-                    ClearOutput();
-                    return;
-                case "login":
-                    StartLoginSequence();
-                    return;
-                case "start":
-                    StartGame();
-                    return;
-                default:
-                    PrintOutput(command, commands.commandDictionary[command]);
-                    return;
-            }
-        }
-        else
-        {
-            PrintOutput(command, commands.commandDictionary["help"]);
-        }
+        CommandFactory.GetCommand(command, this).Execute();
+        // if (commands.commandDictionary.ContainsKey(command))
+        // {
+        //     switch (command)
+        //     {
+        //         case "clear":
+        //             ClearOutput();
+        //             return;
+        //         case "login":
+        //             StartLoginSequence();
+        //             return;
+        //         case "start":
+        //             StartGame();
+        //             return;
+        //         default:
+        //             PrintOutput(command, commands.commandDictionary[command]);
+        //             return;
+        //     }
+        // }
+        // else
+        // {
+        //     PrintOutput(command, commands.commandDictionary["help"]);
+        // }
     }
 
     public void UpdateUser(string userString)
@@ -91,9 +120,10 @@ public class ConsoleWindow : MonoBehaviour
         // print out the "are you sure", then wait for y/n
     }
 
-    private void PrintOutput(string command, string output)
+    public void PrintOutput(string command, string output)
     {
-        _consoleOutput.text = _consoleOutput.text + _consoleUser.text + command + Environment.NewLine + output.Replace("\\n", Environment.NewLine);
+        string originalLine = _consoleOutput.text + _consoleUser.text + command + Environment.NewLine;
+        _consoleOutput.text = originalLine + output.Replace("\\n", Environment.NewLine);
         _consoleInput.text = "";
         ResetPosition();
     }

@@ -844,7 +844,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5118286732654664241}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5072281308532474446}
+        m_TargetAssemblyTypeName: ConsoleWindow, Assembly-CSharp
+        m_MethodName: MaximizeWindow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1450418710855025861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2316,7 +2328,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5171119052920257714}
   m_HandleRect: {fileID: 5743222388806178685}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
