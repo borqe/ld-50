@@ -12,6 +12,7 @@ namespace Terminal.Commands
         {
             new SetGameStateEvent(GameState.GameStateEnum.InProgress).Broadcast();
             terminal.PrintOutput(_originalString, "");
+            terminal.ClearLastCommand();
             yield return null;
         }
     }

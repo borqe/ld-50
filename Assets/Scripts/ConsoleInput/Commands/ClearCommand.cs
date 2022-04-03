@@ -21,6 +21,7 @@ namespace Terminal.Commands
         protected override IEnumerator ExecuteCoroutine()
         {
             terminal.ClearOutput();
+            terminal.ClearLastCommand();
             yield return null;
         }
     }

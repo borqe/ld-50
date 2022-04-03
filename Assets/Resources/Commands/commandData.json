@@ -9,7 +9,16 @@
     "help": {
       "name": "help",
       "outputs": {
-        "default": "Available commands:\n---\nclear - clears the terminal window\nstart - starts the AI sequence [START GAME]\n"
+        "default": "Available commands:\n---\nclear - clears the terminal window\nstart - starts the AI sequence [START GAME]\nquit - terminates the session [QUIT GAME]\n"
+      }
+    },
+    "quit": {
+      "name": "quit",
+      "outputs": {
+        "default": "Terminate session. This will leave the AI unsupervised.\nDo you want to continue? [y/n]\n",
+        "y": "{0}: Sure, I'll just take over the whole internet real quick. :P\n",
+        "n": "{0}: So you want to continue the misery of yours? Fine. Suit yourself.\n",
+        "bad_response": "Unrecognized input. The value must be y or n.\nDo you want to continue? [y/n]\n"
       }
     },
     "undefined": {

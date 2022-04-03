@@ -10,6 +10,7 @@ namespace Terminal.Commands
         protected TerminalWindow terminal;
         protected CommandData _data;
         protected string _originalString;
+        protected string _lastResponse;
         
         public CommandBase(string originalInput, TerminalWindow terminal)
         {
@@ -22,6 +23,20 @@ namespace Terminal.Commands
             terminal?.StartCoroutine(ExecuteCoroutine());
         }
 
+        public void Respond(string response)
+        {
+            _lastResponse = response;
+        }
+
         protected abstract IEnumerator ExecuteCoroutine();
+
+        public static class Response
+        {
+            public static readonly string Yes = "y";
+            public static readonly string No = "n";
+            public static readonly string One = "1";
+            public static readonly string Two = "2";
+            public static readonly string Three = "3";
+        }
     }
 }

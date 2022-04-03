@@ -14,6 +14,8 @@ namespace Terminal.Commands
                     return new ClearCommand(commandName, terminal);
                 case "help":
                     return new HelpCommand(commandName, terminal);
+                case "quit":
+                    return new QuitCommand(commandName, terminal);
                 default:
                     return new UndefinedCommand(commandName, terminal);
             }

@@ -79,9 +79,24 @@ public class TerminalWindow : MonoBehaviour
         
     }
 
+    private CommandBase _lastCommand;
+
+    public void ClearLastCommand()
+    {
+        _lastCommand = null;
+    }
+
     private void HandleCommand(string command)
     {
-        CommandFactory.GetCommand(command, this).Execute();
+        if (_lastCommand != null)
+        {
+            _lastCommand.Respond(command);
+        }
+        else
+        {
+            _lastCommand = CommandFactory.GetCommand(command, this);
+            _lastCommand.Execute();
+        }
     }
 
     public void UpdateUser(string userString)
@@ -112,11 +127,32 @@ public class TerminalWindow : MonoBehaviour
         ResetPosition();
     }
 
-    public void PrintOutput(string command, string output)
+    public void PrintOutput(string command, string output, bool printUser = true)
     {
-        string originalLine = _consoleOutput.text + _terminalUser.text + command + Environment.NewLine;
-        _consoleOutput.text = originalLine + output.Replace("\\n", Environment.NewLine) + Environment.NewLine;
+        if (printUser)
+        {
+            string originalLine = _consoleOutput.text + _terminalUser.text + command + Environment.NewLine;
+            _consoleOutput.text = originalLine + output.Replace("\\n", Environment.NewLine) + Environment.NewLine;
+        }
+        else
+        {
+            _consoleOutput.text =  _consoleOutput.text + output.Replace("\\n", Environment.NewLine) + Environment.NewLine;
+        }
         _terminalInput.text = "";
+        ResetPosition();
+    }
+
+    public void HideUser()
+    {
+        _terminalInput.interactable = false;
+        _terminalInput.gameObject.SetActive(false);
+        // _consoleOutput.
+    }
+
+    public void ShowUser()
+    {
+        _terminalInput.interactable = true;
+        _terminalInput.gameObject.SetActive(true);
         ResetPosition();
     }
 
@@ -133,6 +169,9 @@ public class TerminalWindow : MonoBehaviour
         yield return null;
         _scrollRect.verticalScrollbar.value = 0f;
         _eventSystem.SetSelectedGameObject(null);
-        _eventSystem.SetSelectedGameObject(_terminalInput.gameObject);
+        if (_terminalInput.gameObject.activeSelf)
+        {
+            _eventSystem.SetSelectedGameObject(_terminalInput.gameObject);
+        }
     }
 }
