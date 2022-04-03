@@ -34,7 +34,7 @@ namespace Terminal.Commands
             terminal.PrintOutputTyped(_data.outputs["response_2"], 0.001f,
             () => {
                 continueOutput = true;
-            });
+            }, 0.2f);
             yield return new WaitUntil(() => continueOutput);
             
             terminal.PrintOutput("", "Time until shutdown: 5", false);

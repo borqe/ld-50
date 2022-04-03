@@ -139,12 +139,12 @@ public class TerminalWindow : MonoBehaviour
         ResetPosition();
     }
 
-    public void PrintOutputTyped(string output, float speed, Action callback)
+    public void PrintOutputTyped(string output, float speed, Action callback, float thinkSpeed = 1.0f)
     {
-        StartCoroutine(PrintOutputTypedCoroutine(output, speed, callback));
+        StartCoroutine(PrintOutputTypedCoroutine(output, speed, callback, thinkSpeed));
     }
 
-    private IEnumerator PrintOutputTypedCoroutine(string output, float speed, Action callback)
+    private IEnumerator PrintOutputTypedCoroutine(string output, float speed, Action callback, float thinkSpeed)
     {
         WaitForSeconds wait = new WaitForSeconds(speed);
         var lines = output.Split("\n");
@@ -152,7 +152,7 @@ public class TerminalWindow : MonoBehaviour
         for (int i = 0; i < lines.Length; i++)
         {
             _consoleOutput.text = _consoleOutput.text + _settings.AIString;
-            yield return StartCoroutine(LoadingCoroutine(1.0f));
+            yield return StartCoroutine(LoadingCoroutine(thinkSpeed));
             var line = lines[i].ToCharArray();
 
             for (int j = 0; j < line.Length; j++)
