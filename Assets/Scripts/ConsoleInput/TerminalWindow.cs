@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using ConsoleInput;
 using Terminal.Commands;
 using TMPro;
 using UnityEngine;
@@ -21,6 +22,7 @@ public class TerminalWindow : MonoBehaviour
     private void Awake()
     {
         _eventSystem = FindObjectOfType<EventSystem>();
+        TerminalCommandData.ReadFromFile();
     }
 
     private void OnEnable()
@@ -71,28 +73,6 @@ public class TerminalWindow : MonoBehaviour
     private void HandleCommand(string command)
     {
         CommandFactory.GetCommand(command, this).Execute();
-        // if (commands.commandDictionary.ContainsKey(command))
-        // {
-        //     switch (command)
-        //     {
-        //         case "clear":
-        //             ClearOutput();
-        //             return;
-        //         case "login":
-        //             StartLoginSequence();
-        //             return;
-        //         case "start":
-        //             StartGame();
-        //             return;
-        //         default:
-        //             PrintOutput(command, commands.commandDictionary[command]);
-        //             return;
-        //     }
-        // }
-        // else
-        // {
-        //     PrintOutput(command, commands.commandDictionary["help"]);
-        // }
     }
 
     public void UpdateUser(string userString)
@@ -125,12 +105,12 @@ public class TerminalWindow : MonoBehaviour
     public void PrintOutput(string command, string output)
     {
         string originalLine = _consoleOutput.text + _terminalUser.text + command + Environment.NewLine;
-        _consoleOutput.text = originalLine + output.Replace("\\n", Environment.NewLine);
+        _consoleOutput.text = originalLine + output.Replace("\\n", Environment.NewLine) + Environment.NewLine;
         _terminalInput.text = "";
         ResetPosition();
     }
 
-    private void ClearOutput()
+    public void ClearOutput()
     {
         _consoleOutput.text = "";
         _terminalInput.text = "";
