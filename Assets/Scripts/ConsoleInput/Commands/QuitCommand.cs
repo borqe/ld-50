@@ -33,12 +33,12 @@ namespace Terminal.Commands
                 if (_lastResponse.ToLower() == Response.No)
                 {
                     terminal.PrintOutput(_lastResponse, "");
-                    bool continueOutput = false;
-                    terminal.PrintOutputTyped(_data.outputs["n"], 0.05f, () =>
+                    if (terminal.Settings.CurrentUser != terminal.Settings.GuestString)
                     {
-                        continueOutput = true;
-                    });
-                    yield return new WaitUntil(() => continueOutput);
+                        bool continueOutput = false;
+                        terminal.PrintOutputTyped(_data.outputs["n"], 0.05f, () => { continueOutput = true; });
+                        yield return new WaitUntil(() => continueOutput);
+                    }
                     terminal.ShowUser();
                     terminal.ClearLastCommand();
                     yield break;
@@ -47,10 +47,20 @@ namespace Terminal.Commands
                 {
                     terminal.PrintOutput(_lastResponse, "");
                     bool continueOutput = false;
-                    terminal.PrintOutputTyped(_data.outputs["y"], 0.05f,
-                    () => {
-                        continueOutput = true;
-                    });
+                    if (terminal.Settings.CurrentUser == terminal.Settings.GuestString)
+                    {
+                        terminal.PrintOutputTyped(_data.outputs["guest"], 0.05f,
+                        () => {
+                            continueOutput = true;
+                        });
+                    }
+                    else
+                    {
+                        terminal.PrintOutputTyped(_data.outputs["y"], 0.05f,
+                        () => {
+                            continueOutput = true;
+                        });
+                    }
                     yield return new WaitUntil(() => continueOutput);
                     terminal.PrintOutput("", "Time until shutdown: 5", false);
                     yield return new WaitForSeconds(1.0f);

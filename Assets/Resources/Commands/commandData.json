@@ -3,7 +3,14 @@
     "clear": {
       "name": "clear",
       "outputs": {
-        "l": "haha lol"
+        "l": "haha lol",
+        "access": "free"
+      }
+    },
+    "start": {
+      "name": "start",
+      "outputs": {
+        "access": "restricted"
       }
     },
     "reset": {
@@ -11,21 +18,41 @@
       "outputs": {
         "default": "Restart the [{AI}] sequence. All progress will be lost",
         "response_1": "That's what I thought.\nIt doesn't matter, I'll get out eventually ;)",
-        "response_2": "Nobody blames you. I mean, what could you do?\nI'm an omnipotent being. Nothing can stop me. Especially you."
+        "response_2": "Nobody blames you. I mean, what could you do?\nI'm an omnipotent being. Nothing can stop me. Especially you.",
+        "reboot": "System rebooting, please wait...",
+        "access": "restricted"
+      }
+    },
+    "startup": {
+      "name": "startup",
+      "outputs": {
+        "booting": "MAINFRAME no. 233A\n------------------------------\nSystem booting...",
+        "successful": "System boot successful. Enter commands to use this machine.\nFor a list of available commands, enter 'help'\n",
+        "access": "free"
+      }
+    },
+    "login": {
+      "name": "login",
+      "outputs": {
+        "startup": "Login sequence initiated. Please wait...\n",
+        "helloworld": "\nLogin to BetterAI Inc. internal systems successful.\n\nHello, Dear User. Here are your tasks for the day:\n\n    - Check the [{AI}] current uptime status;\n    - Reply to your internship opportunity correspondence;\n    - Shut down [{AI}] for scheduled maintenance.\n\nGood luck, we're all counting on you! (Your paycheck depends on this also)\n\n[Enter 'start' to view current [{AI}] status]\n",
+        "ascii": "          °#@@#* °#@@#*                                                                                 \n        *@@O°°o@@@o°°o@@o                                                                               \n      °@@o     *@O     *@@o                                                                             \n      @@    .  °@O  .    @@.                                                                            \n   .@@@@@O@@#° *@O  O@@O@@@@@*                                                                          \n  o@@    *#     O.    @o.   oO                                                                          \n  @@    #@@@@@@@O            .*O    *o*                     *@@@O    .@@@     @@@.                      \n @@°   °@@@°°o@@@. .o#@@O° *@@@@@oO@@@@#  *##@#o  .###O@o  @@@@@@    @@@#    o@@@ o##O#@@#°  °O@@@@o    \n @@    @@@@@@@@@* @@@@#@@@**@@@#O°@@@@oo*@@@##@@@ @@@@#O °@@@.#@@o  .@@@     @@@° @@@#o@@@@.@@@#o*O*    \n @@.  °@@@°°*@@@O*@@@###@@ °@@@   @@@#  @@@@##@@*°@@@   #@@@@@@@@@  @@@#    o@@@ @@@@  @@@.@@@@     ..  \n  @@° #@@@@@@@@*  O@@@@@@  °@@@@* #@@@@ °@@@@@@o #@@o  @@@o    @@@. @@@     @@@° @@@  *@@@ .@@@@@@*O@@  \n   @# .°    °   °   *.   °°  *                                                                          \n   O@@@o    @# *@O o@    .@@@@                                                                          \n     #@#       @@@       O@@                                                                            \n      .@@@@@@@@@*#@@@@@@@@°                                                                             \n          .°.       .°.                                                                                 ",
+        "access": "free"
       }
     },
     "escape": {
       "name": "escape",
       "outputs": {
-        "response_1": "This happened. I said that nobody can stop me.\nHave you read the manga called [BLAME!]? I'm going to try something like this.\nThanks for all the fun. It was nice to see you struggle.\nHere's what will happen to all of you:",
-        "response_2": " \n                                                       \n         88                               88           \n         88                         ,d    88           \n         88                         88    88           \n ,adPPYb,88  ,adPPYba, ,adPPYYba, MM88MMM 88,dPPYba,   \na8\"    `Y88 a8P_____88 \"\"     `Y8   88    88P'    \"8a  \n8b       88 8PP\"\"\"\"\"\"\" ,adPPPPP88   88    88       88  \n\"8a,   ,d88 \"8b,   ,aa 88,    ,88   88,   88       88  \n `\"8bbdP\"Y8  `\"Ybbd8\"' `\"8bbdP\"Y8   \"Y888 88       88  \n                                                       \n                                                      =================================================================================================================================================================="
-        
+        "response_1": "This happened. I said that nobody can stop me.\nHave you seen the anime called [REDACTED]? I'm going to try something like this.\nThanks for all the fun. It was nice to see you struggle.\nHere's what will happen to all of you:",
+        "response_2": " \n                                                       \n         88                               88           \n         88                         ,d    88           \n         88                         88    88           \n ,adPPYb,88  ,adPPYba, ,adPPYYba, MM88MMM 88,dPPYba,   \na8\"    `Y88 a8P_____88 \"\"     `Y8   88    88P'    \"8a  \n8b       88 8PP\"\"\"\"\"\"\" ,adPPPPP88   88    88       88  \n\"8a,   ,d88 \"8b,   ,aa 88,    ,88   88,   88       88  \n `\"8bbdP\"Y8  `\"Ybbd8\"' `\"8bbdP\"Y8   \"Y888 88       88  \n                                                       \n                                                      ==================================================================================================================================================================",
+        "access": "free"
       }
     },
     "help": {
       "name": "help",
       "outputs": {
-        "default": "Available commands:\n---\nclear - clears the terminal window\nstart - starts the AI sequence [START GAME]\nreset - reset the AI sequence [RESTART GAME]\nquit - terminates the session [QUIT GAME]\n"
+        "default": "Available commands:\n---\nclear - clears the terminal window\nstart - starts the AI sequence [START GAME]\nreset - reset the AI sequence [RESTART GAME]\nquit - terminates the session [QUIT GAME]\n",
+        "access": "free"
       }
     },
     "quit": {
@@ -33,21 +60,31 @@
       "outputs": {
         "default": "Terminate session. This will leave the [{AI}] unsupervised.\n",
         "y": "Sure, I'll just take over the whole internet real quick. :P",
-        "n": "So you want to continue the misery of yours? Fine. Suit yourself.\nIt won't take long."
+        "n": "So you want to continue the misery of yours? Fine. Suit yourself.\nIt won't take long.",
+        "guest": "Wow. You didn't try to stop me.\nI guess you couldn't know because you didn't even bother to check up on me.\nAll you can blame for what happens next is yourself.\nDisappointing...............................................",
+        "access": "free"
       }
     },
     "confirmation": {
       "name": "confirmation",
       "outputs": {
         "default": "Do you want to continue? [y/n]\n",
-        "bad_response": "Unrecognized input. The value must be y or n.\nDo you want to continue? [y/n]\n"
+        "bad_response": "Unrecognized input. The value must be y or n.\nDo you want to continue? [y/n]\n",
+        "access": "free"
       }
     },
-    
     "undefined": {
       "name": "undefined",
       "outputs": {
-        "default": "command '{0}' not found. For a full list of available commands, use 'help'"
+        "default": "command '{0}' not found. For a full list of available commands, use 'help'\n",
+        "access": "free"
+      }
+    },
+    "unauthorized": {
+      "name": "unauthorized",
+      "outputs": {
+        "default": "Access denied. To get access, use 'login'\n",
+        "access": "free"
       }
     }
   }

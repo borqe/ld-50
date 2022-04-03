@@ -48,6 +48,7 @@ namespace Terminal.Commands
                         continueOutput = true;
                     });
                     yield return new WaitUntil(() => continueOutput);
+                    terminal.PrintOutput("", _data.outputs["reboot"], false);
                     yield return new WaitForSeconds(2.0f);
                     
                     _lastResponse = null;

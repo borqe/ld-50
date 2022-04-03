@@ -4,5 +4,7 @@ using UnityEngine;
 public class TerminalSettings : ScriptableObject
 {
     public string UserString;
+    public string GuestString;
     public string AIString;
+    public string CurrentUser;
 }

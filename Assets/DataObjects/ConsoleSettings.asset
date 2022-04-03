@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04e94d6184f14177a5e3581e07e933c9, type: 3}
   m_Name: ConsoleSettings
   m_EditorClassIdentifier: 
-  UserString: Intern@CERN
+  UserString: Intern@BetterAI_Internal
+  GuestString: Guest@BetterAI_Internal
   AIString: 'NaTA~ '
+  CurrentUser: Guest@BetterAI_Internal

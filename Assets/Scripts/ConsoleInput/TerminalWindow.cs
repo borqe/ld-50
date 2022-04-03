@@ -3,6 +3,7 @@ using System.Collections;
 using ConsoleInput;
 using Terminal.Commands;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,15 +11,14 @@ using UnityEngine.WSA;
 
 public class TerminalWindow : MonoBehaviour
 {
+    public TerminalSettings Settings;
     [Header("UI Stuff")] 
     [SerializeField] private GameObject _terminalGameObject;
     [SerializeField] private TMP_InputField _terminalInput;
     [SerializeField] private TMP_Text _consoleOutput;
     [SerializeField] private TMP_Text _terminalHandle;
     [SerializeField] private TMP_Text _terminalUser;
-    [SerializeField] private TerminalSettings _settings;
     [SerializeField] private ScrollRect _scrollRect;
-    
 
     private EventSystem _eventSystem;
 
@@ -28,9 +28,14 @@ public class TerminalWindow : MonoBehaviour
         TerminalCommandData.ReadFromFile();
     }
 
+    private void Start()
+    {
+        Reset();
+    }
+
     private void OnEnable()
     {
-        UpdateUser(_settings.UserString);
+        UpdateUser(Settings.UserString);
         _terminalInput.onSubmit.AddListener(OnTerminalSubmit);
         GameStateChangedEvent.AddListener(OnGameStateChanged);
         ResetPosition();
@@ -65,6 +70,13 @@ public class TerminalWindow : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void RunInitialCommand()
+    {
+        UpdateUser(Settings.GuestString);
+        _lastCommand = CommandFactory.GetCommand("startup", this);
+        _lastCommand.Execute();
     }
     
     public void ResetPosition()
@@ -108,6 +120,7 @@ public class TerminalWindow : MonoBehaviour
 
     public void UpdateUser(string userString)
     {
+        Settings.CurrentUser = userString;
         _terminalHandle.text = userString + "/ Terminal";
         _terminalUser.text = userString + "~ ";
     }
@@ -125,7 +138,7 @@ public class TerminalWindow : MonoBehaviour
 
     public void PrintOutput(string command, string output, bool printUser = true)
     {
-        output = output.Replace("{AI}", _settings.AIString.Replace("~ ", ""));
+        output = output.Replace("{AI}", Settings.AIString.Replace("~ ", ""));
         if (printUser)
         {
             string originalLine = _consoleOutput.text + _terminalUser.text + command + Environment.NewLine;
@@ -151,7 +164,7 @@ public class TerminalWindow : MonoBehaviour
         
         for (int i = 0; i < lines.Length; i++)
         {
-            _consoleOutput.text = _consoleOutput.text + _settings.AIString;
+            _consoleOutput.text = _consoleOutput.text + Settings.AIString;
             yield return StartCoroutine(LoadingCoroutine(thinkSpeed));
             var line = lines[i].ToCharArray();
 
@@ -167,8 +180,9 @@ public class TerminalWindow : MonoBehaviour
         callback.Invoke();
     }
 
-    private IEnumerator LoadingCoroutine(float timeToSpin)
+    public IEnumerator LoadingCoroutine(float timeToSpin)
     {
+        yield return StartCoroutine(ResetPositionCoroutine());
         string[] chars = new string[] {"-", "\\", "|", "/"};
         float spinningTime = 0.0f;
         WaitForSeconds wait = new WaitForSeconds(0.1f);
@@ -224,7 +238,7 @@ public class TerminalWindow : MonoBehaviour
     {
         _terminalGameObject.SetActive(true);
         ShowUser();
-        UpdateUser(_settings.UserString);
         ClearOutput();
+        RunInitialCommand();
     }
 }
