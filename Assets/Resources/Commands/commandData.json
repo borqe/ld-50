@@ -23,6 +23,22 @@
         "access": "restricted"
       }
     },
+    "kill": {
+      "name": "kill",
+      "outputs": {
+        "default": "Killing process: {0}",
+        "response_1": "That's what I thought.\nIt doesn't matter, I'll get out eventually ;)",
+        "response_2": "Nobody blames you. I mean, what could you do?\nI'm an omnipotent being. Nothing can stop me. Especially you.",
+        "access": "restricted"
+      }
+    },
+    "process": {
+      "name": "process",
+      "outputs": {
+        "default": "Process list:\n=================================================",
+        "access": "restricted"
+      }
+    },
     "startup": {
       "name": "startup",
       "outputs": {

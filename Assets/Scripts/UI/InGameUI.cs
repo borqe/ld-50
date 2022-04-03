@@ -1,16 +1,21 @@
+using System;
 using UnityEngine;
 
 public class InGameUI: MonoBehaviour
 {
     [SerializeField] private GameObject _progressSlider;
+    [SerializeField] private GameObject _otherStats;
+    [SerializeField] private GameObject _statusIndicator;
+    [SerializeField] private GameObject _terminalHint;
 
     private void Start()
     {
-        _progressSlider.SetActive(false);
+        ActivateUI(false);
     }
 
     private void OnEnable()
     {
+        _terminalHint.SetActive(false);
         GameStateChangedEvent.AddListener(OnGameStateChanged);
     }
 
@@ -21,15 +26,33 @@ public class InGameUI: MonoBehaviour
 
     private void OnGameStateChanged(GameStateChangedEvent data)
     {
-        if (data.State == GameState.GameStateEnum.InTerminalWindow)
-            ActivateProgressSlider(false);
-        else if (data.State == GameState.GameStateEnum.InProgress)
-            ActivateProgressSlider(true);
+        switch (data.State)
+        {
+            case GameState.GameStateEnum.InProgress:
+                ActivateUI(true);
+                _terminalHint.SetActive(true);
+                break;
+            case GameState.GameStateEnum.InTerminalWindow:
+                ActivateUI(true);
+                _terminalHint.SetActive(false);
+                break;
+            case GameState.GameStateEnum.GameOver:
+                ActivateUI(true);
+                _terminalHint.SetActive(false);
+                break;
+            case GameState.GameStateEnum.GameNotStarted:
+                ActivateUI(false);
+                _terminalHint.SetActive(false);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
-
-    private void ActivateProgressSlider(bool active)
+    private void ActivateUI(bool active)
     {
         _progressSlider.SetActive(active);
+        _otherStats.SetActive(active);
+        _statusIndicator.SetActive(active);
     }
 }

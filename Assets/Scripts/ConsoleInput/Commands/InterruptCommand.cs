@@ -10,6 +10,8 @@ namespace Terminal.Commands
 
         protected override IEnumerator ExecuteCoroutine()
         {
+            terminal.PrintOutput(_originalString, _data.outputs["default"]);
+            terminal.ClearLastCommand();
             yield return null;
         }
     }
