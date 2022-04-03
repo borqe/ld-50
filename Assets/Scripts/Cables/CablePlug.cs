@@ -88,13 +88,15 @@ public class CablePlug : MonoBehaviour
         CollisionEnabled = false;
     }
 
-    private void EnableGravity()
+    public void EnableGravity()
     {
         Rigidbody r = GetComponent<Rigidbody>();
         r.useGravity = true;
         r.velocity = FakeVelocityCache * 15f;
         BoxCollider bc = GetComponent<BoxCollider>();
         bc.isTrigger = false;
+        PendingGravity = false;
+        CollisionEnabled = false;
         CanBeMoved = false;
     }
 

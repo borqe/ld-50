@@ -18,7 +18,7 @@ public class AIState_Charging : AIState
         public float DataTransferPerConnection;
     }
 
-    private class ConnectingCable
+    public class ConnectingCable
     {
         public float ConnectionSpeed;
         public Cable Cable;
@@ -43,6 +43,7 @@ public class AIState_Charging : AIState
     protected override void Construct()
     {
         ConnectingCables = new List<ConnectingCable>();
+        ConnectingCables.AddRange(AIController.ConnectingCables.ToArray());
         NextCableConnectionIn = 0;
         new AIStateChangedEvent(AIStateType.TransferingData).Broadcast();
     }
@@ -85,6 +86,7 @@ public class AIState_Charging : AIState
 
         cc.Module.OnCableInitiallyConnected += () => OnCableConnected(cc);
         ConnectingCables.Add(cc);
+        AIController.ConnectingCables.Add(cc);
     }
 
     private void OnCableConnected(ConnectingCable cc)
