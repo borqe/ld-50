@@ -809,7 +809,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5514754150384673631}
-  - component: {fileID: 6693019259369912196}
   m_Layer: 5
   m_Name: TerminalIndicator
   m_TagString: Untagged
@@ -838,15 +837,3 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 381.05664, y: 30}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &6693019259369912196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8981705958083547276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df9292ed49df840e59f4f3b1a3c9c806, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
