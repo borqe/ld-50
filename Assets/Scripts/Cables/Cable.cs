@@ -8,6 +8,8 @@ public class Cable : MonoBehaviour
 {
     private LineRenderer LineRenderer;
 
+    [SerializeField] private float CableDataTransferAnimationInterval;
+    [SerializeField] private CableDataTransferAnimation CableDataTransferAnimationPrefab;
     [SerializeField] private CablePlug StartPlug;
     [SerializeField] private CablePlug EndPlug;
 
@@ -15,6 +17,10 @@ public class Cable : MonoBehaviour
     private PopupBase ConnectingPopup;
     private Action<Cable> OnDisconnected;
     public bool IsFullyConnected { get; private set; }
+
+    private Coroutine DataAnimationRoutine;
+
+    private bool AnimateDataTransfer;
 
     private void Awake()
     {
@@ -48,7 +54,7 @@ public class Cable : MonoBehaviour
         if(ConnectingPopup != null)
             Destroy(ConnectingPopup.gameObject);
         EndPlug.SetPendingGravity();
-        IsFullyConnected = false;
+        SetIsFullyConnected(false);
     }
 
     public void DropEndPlug()
@@ -57,7 +63,7 @@ public class Cable : MonoBehaviour
         if (ConnectingPopup != null)
             Destroy(ConnectingPopup.gameObject);
         EndPlug.EnableGravity();
-        IsFullyConnected = false;
+        SetIsFullyConnected(false);
     }
 
     public CablePlug GetPlug(CablePlugType plugType)
@@ -77,6 +83,28 @@ public class Cable : MonoBehaviour
 
     public void SetIsFullyConnected(bool value)
     {
-        IsFullyConnected = true;
+        IsFullyConnected = value;
+        EnableDataTransferAnimation(value);
+    }
+
+    public void EnableDataTransferAnimation(bool enable)
+    {
+        AnimateDataTransfer = enable;
+        if (AnimateDataTransfer)
+        {
+            if (DataAnimationRoutine == null)
+                DataAnimationRoutine = StartCoroutine(DataTransferAnimation());
+        }
+    }
+
+    private IEnumerator DataTransferAnimation()
+    {
+        var delay = new WaitForSeconds(CableDataTransferAnimationInterval);
+        while (AnimateDataTransfer && this != null)
+        {
+            var animation = Instantiate(CableDataTransferAnimationPrefab, transform);
+            animation.Setup(StartPlug.transform, EndPlug.transform);
+            yield return delay;
+        }
     }
 }

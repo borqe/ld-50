@@ -134,5 +134,6 @@ public class AIState_Charging : AIState
         Vector3 moduleAttachmentPos = connectingCable.Module.CableAttachementPosition.position;
         Vector3 newPos = plugPos + ((moduleAttachmentPos - plugPos).normalized * (connectingCable.ConnectionSpeed * Time.deltaTime));
         connectingCable.Cable.ForceMovePlug(CablePlugType.End, newPos);
+        plug.SetDirection(moduleAttachmentPos);
     }
 }

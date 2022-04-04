@@ -146,6 +146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a90a08605e6f74bb4b5d404658c294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CableDataTransferAnimationInterval: 1
+  CableDataTransferAnimationPrefab: {fileID: 7654780677891510303, guid: 6a5d5101b4a69894e8b8c065a821f969,
+    type: 3}
   StartPlug: {fileID: 6235111986392934536}
   EndPlug: {fileID: 8433028540487161483}
 --- !u!1001 &5191350335820139204

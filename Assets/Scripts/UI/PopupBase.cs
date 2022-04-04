@@ -21,6 +21,22 @@ public class PopupBase: MonoBehaviour
         transform.localPosition = new Vector3(1.5f, 4.0f, -2.0f);
     }
 
+    private void OnDisable()
+    {
+        ClearCaches();
+    }
+
+    private void OnDestroy()
+    {
+        ClearCaches();
+    }
+
+    private void ClearCaches()
+    {
+        onTimerEnd = null;
+        onPopupClicked = null;
+    }
+
     private void Update()
     {
         transform.LookAt(_mainCamera.transform);

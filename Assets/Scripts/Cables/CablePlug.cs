@@ -111,4 +111,9 @@ public class CablePlug : MonoBehaviour
             OnPositionChanged?.Invoke(this);
         }
     }
+
+    public void SetDirection(Vector3 target)
+    {
+        transform.LookAt(target);
+    }
 }
