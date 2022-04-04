@@ -53,6 +53,8 @@ public class AIController : Singleton<AIController>
 {
     [SerializeField] private AISettings AISettings;
     public AISettings Settings => AISettings;
+    [SerializeField] private Transform _EmojiSpawnTransform;
+    public Transform EmojiSpawnTransform => _EmojiSpawnTransform;
 
     public AIData AIData { get; private set; }
     public List<Cable> ConnectedCables { get; private set; }

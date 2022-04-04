@@ -27,21 +27,34 @@ public struct Emoji
 [CreateAssetMenu(fileName = "EmojiData", menuName = "Custom/EmojiData")]
 public class EmojiData : ScriptableObject
 {
-    [SerializeField] private List<Emoji> Emojis;
+    [SerializeField] public List<Emoji> Emojis;
+}
 
+
+public class EmojiDatabase
+{
+    private EmojiData Data;
     private Dictionary<EmojiType, string> EmojiDictionary;
 
-    private static EmojiData Instance;
+    public static EmojiDatabase Instance;
 
-    private void Awake()
+    public static void Create(EmojiData data)
+    {
+        Instance = new EmojiDatabase(data);
+    }
+
+    public EmojiDatabase(EmojiData data)
     {
         if (Instance != null)
-            throw new System.Exception("Duplicate Emoji Data Asset");
-
+        {
+            Debug.LogError("Duplicate EmojiDatabase");
+            return;
+        }
         Instance = this;
+        Data = data;
 
         EmojiDictionary = new Dictionary<EmojiType, string>();
-        foreach (var e in Emojis)
+        foreach (var e in Data.Emojis)
         {
             if (EmojiDictionary.ContainsKey(e.EmojiType))
                 Debug.LogError($"Duplicate entry: '{e.EmojiType}'");

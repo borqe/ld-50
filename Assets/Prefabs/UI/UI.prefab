@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a85a260a18894c4e97dedad7a7ef25b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EmojiData: {fileID: 11400000, guid: 964e77efb286e844980efbc313324954, type: 2}
   _overlayCanvas: {fileID: 8986606090225272564}
   _worldCanvas: {fileID: 6043971038092445878}
   _inGameUI: {fileID: 2023069717893720278}

@@ -20,7 +20,7 @@ public class PopupEmoji : MonoBehaviour
 
     public void Setup(EmojiType emojiType)
     {
-        TextField.text = $"<sprite={EmojiData.GetEmoji(emojiType)}>";
+        TextField.text = $"<sprite name={EmojiDatabase.GetEmoji(emojiType)}>";
     }
 
     private void Update()
