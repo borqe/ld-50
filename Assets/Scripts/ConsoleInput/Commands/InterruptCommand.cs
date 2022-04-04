@@ -9,8 +9,7 @@ namespace Terminal.Commands
     {
         public InterruptCommand(string originalInput, TerminalWindow terminal) : base(originalInput, terminal)
         {
-            // int randomInterrupt = UnityEngine.Random.Range(1, 6);
-            int randomInterrupt = 1;
+            int randomInterrupt = UnityEngine.Random.Range(1, 6);
             if (TerminalCommandData.Commands.Data.ContainsKey("interrupt_" + randomInterrupt))
             {
                 _data = TerminalCommandData.Commands.Data["interrupt_" + randomInterrupt];
