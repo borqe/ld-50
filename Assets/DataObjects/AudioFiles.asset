@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7acd7340ae6b4d18935295e88e3d5bfb, type: 3}
   m_Name: AudioFiles
   m_EditorClassIdentifier: 
-  Music: {fileID: 0}
+  Music: {fileID: 8300000, guid: 1357aace376e7f64bb2c868b89406e35, type: 3}
   voiceLines:
   - Key: reset_response_1
     Clip: {fileID: 8300000, guid: ef9d84bcc6841474fafd52f852ddc843, type: 3}

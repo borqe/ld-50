@@ -54,9 +54,11 @@ namespace Terminal.Commands
                          () => { continueOutput = true; });
 
                     yield return new WaitUntil(() => continueOutput);
+                    yield return new WaitForSeconds(2.0f);
+                    terminal.ShowUser();
+                    yield return new WaitForSeconds(0.5f);
                     new SetGameStateEvent(GameState.GameStateEnum.InProgress).Broadcast();
                     new SetAIStateEvent(AIStateType.TransferingData).Broadcast();
-                    terminal.ShowUser();
                     terminal.ClearLastCommand();
                     yield break;
                 }
@@ -66,9 +68,11 @@ namespace Terminal.Commands
                          () => { continueOutput = true; });
 
                     yield return new WaitUntil(() => continueOutput);
+                    yield return new WaitForSeconds(2.0f);
+                    terminal.ShowUser();
+                    yield return new WaitForSeconds(0.5f);
                     new SetGameStateEvent(GameState.GameStateEnum.InProgress).Broadcast();
                     new SetAIStateEvent(AIStateType.Scared).Broadcast();
-                    terminal.ShowUser();
                     terminal.ClearLastCommand();
                     yield break;
                 }
@@ -78,9 +82,12 @@ namespace Terminal.Commands
                         () => { continueOutput = true; });
 
                     yield return new WaitUntil(() => continueOutput);
+                    yield return new WaitForSeconds(2.0f);
                     new SetGameStateEvent(GameState.GameStateEnum.InProgress).Broadcast();
                     new SetAIStateEvent(AIStateType.Confused).Broadcast();
                     terminal.ShowUser();
+                    yield return new WaitForSeconds(0.5f);
+                    new SetGameStateEvent(GameState.GameStateEnum.InProgress).Broadcast();
                     terminal.ClearLastCommand();
                     yield break;
                 }

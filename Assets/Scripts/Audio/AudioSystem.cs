@@ -13,6 +13,7 @@ namespace Audio
             _musicSource.clip = _files.Music;
             _musicSource.loop = true;
             _musicSource.playOnAwake = true;
+            _musicSource.Play();
         }
 
         public void PlayVoiceLine(string line)
