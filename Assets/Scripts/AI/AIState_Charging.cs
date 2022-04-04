@@ -54,7 +54,7 @@ public class AIState_Charging : AIState
 
     private IEnumerator InterruptionCoroutine()
     {
-        float timeUntilInterruption = UnityEngine.Random.Range(3.0f, 7.0f);
+        float timeUntilInterruption = UnityEngine.Random.Range(8.0f, 12.0f);
         yield return new WaitForSeconds(timeUntilInterruption);
         new AIInterrupt.AIInterruptEvent().Broadcast();
         new SetAIStateEvent(AIStateType.Idle).Broadcast();
