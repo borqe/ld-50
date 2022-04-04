@@ -3,12 +3,14 @@ using UnityEngine;
 public class GameUI : MonoBehaviour
 {
     public static GameUI Instance { get; private set; }
+    [SerializeField] private EmojiData EmojiData;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            EmojiDatabase.Create(EmojiData);
             DontDestroyOnLoad(this);
         }
         else

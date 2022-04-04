@@ -24,6 +24,7 @@ public class AIState_Confused : AIState
         new AIStateChangedEvent(AIStateType.Confused).Broadcast();
         DelayTime = AIController.Settings.ConfusedSettings.DataTransferHaltTime;
         AIController.StartCoroutine(TimeoutCoroutine());
+        GameUI.Instance.CreateEmojiPopup(AIController.EmojiSpawnTransform.position, EmojiType.Amazed);
     }
 
     public IEnumerator TimeoutCoroutine()

@@ -24,6 +24,7 @@ public class AIState_Scared : AIState
         DropConnections();
         StateTime = AIController.Settings.ScaredSettings.StateDuration;
         AIController.StartCoroutine(TimeoutCoroutine());
+        GameUI.Instance.CreateEmojiPopup(AIController.EmojiSpawnTransform.position, EmojiType.Confounded);
     }
 
     private IEnumerator TimeoutCoroutine()

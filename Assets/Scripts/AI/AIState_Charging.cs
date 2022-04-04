@@ -48,6 +48,7 @@ public class AIState_Charging : AIState
         ConnectingCables.AddRange(AIController.ConnectingCables.ToArray());
         NextCableConnectionIn = 0;
         new AIStateChangedEvent(AIStateType.TransferingData).Broadcast();
+        GameUI.Instance.CreateEmojiPopup(AIController.EmojiSpawnTransform.position, EmojiType.Angry);
         AIController.StartCoroutine(InterruptionCoroutine());
     }
 
