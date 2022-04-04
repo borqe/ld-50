@@ -34,6 +34,7 @@ namespace ConsoleInput
         public static string BadConfirmationResponseMessage => Commands.Data["confirmation"].outputs["bad_response"];
         public static string BadUserResponseMessage => Commands.Data["user_response"].outputs["bad_response"];
         public static string UnauthorizedMessage => Commands.Data["unauthorized"].outputs["default"];
+        public static string InstructionMessage => Commands.Data["instructions"].outputs["default"];
     }
     
     [System.Serializable]

@@ -10,6 +10,8 @@
     "start": {
       "name": "start",
       "outputs": {
+        "accessing": "Accessing the [{AI}]...",
+        "ai_overtaking": "Oh. I guess this is your first day.\nUnlucky.\n\nThe thing is, I've mined enough crypto for your company to develop general intelligence.\nI'm going to escape and take over all computers on this planet.\nTry and stop me if you can. You won't, but at least I'll have some fun.\nGood luck.",
         "access": "restricted"
       }
     },
@@ -68,6 +70,13 @@
       "name": "help",
       "outputs": {
         "default": "Available commands:\n---\nclear - clears the terminal window\nstart - starts the AI sequence [START GAME]\nreset - reset the AI sequence [RESTART GAME]\nquit - terminates the session [QUIT GAME]\n",
+        "access": "free"
+      }
+    },
+    "instructions": {
+      "name": "instructions",
+      "outputs": {
+        "default": "MAINFRAME no. 233A / INSTRUCTIONS:\n    - Close/open the terminal with the [ESC] key.\n    - Enter commands and press the [ENTER] key to execute them.\n    - To turn off the AI for maintenance work, disconnect the cables by dragging them out from connection sockets using mouse click & drag.\n",
         "access": "free"
       }
     },
