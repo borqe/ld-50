@@ -124,6 +124,62 @@
         "ai_response_3": "This is the third response.",
         "access": "free"
       }
+    },
+    "interrupt_2": {
+      "name": "interrupt_2",
+      "outputs": {
+        "default": "Choose a response. Enter 1, 2 or 3.\n",
+        "question": "I want to play a game.\nThis is the game that we'll play:",
+        "response_1": "1",
+        "response_2": "2",
+        "response_3": "3",
+        "ai_response_1": "This is the first response.",
+        "ai_response_2": "This is the seconds response.",
+        "ai_response_3": "This is the third response.",
+        "access": "free"
+      }
+    },
+    "interrupt_3": {
+      "name": "interrupt_3",
+      "outputs": {
+        "default": "Choose a response. Enter 1, 2 or 3.\n",
+        "question": "I want to play a game.\nThis is the game that we'll play:",
+        "response_1": "1",
+        "response_2": "2",
+        "response_3": "3",
+        "ai_response_1": "This is the first response.",
+        "ai_response_2": "This is the seconds response.",
+        "ai_response_3": "This is the third response.",
+        "access": "free"
+      }
+    },
+    "interrupt_4": {
+      "name": "interrupt_4",
+      "outputs": {
+        "default": "Choose a response. Enter 1, 2 or 3.\n",
+        "question": "I want to play a game.\nThis is the game that we'll play:",
+        "response_1": "1",
+        "response_2": "2",
+        "response_3": "3",
+        "ai_response_1": "This is the first response.",
+        "ai_response_2": "This is the seconds response.",
+        "ai_response_3": "This is the third response.",
+        "access": "free"
+      }
+    },
+    "interrupt_5": {
+      "name": "interrupt_5",
+      "outputs": {
+        "default": "Choose a response. Enter 1, 2 or 3.\n",
+        "question": "I want to play a game.\nThis is the game that we'll play:",
+        "response_1": "1",
+        "response_2": "2",
+        "response_3": "3",
+        "ai_response_1": "This is the first response.",
+        "ai_response_2": "This is the seconds response.",
+        "ai_response_3": "This is the third response.",
+        "access": "free"
+      }
     }
   }
 }
