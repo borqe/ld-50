@@ -27,16 +27,25 @@ public class GameUI : MonoBehaviour
 
     [Header("Popups")] 
     [SerializeField] private GameObject _popupPrefab;
-    
+    [SerializeField] private GameObject _popupEmoji;
+
     private void Start()
     {
         _worldCanvas.worldCamera = Camera.main;
     }    
 
-    public PopupBase CreatePopup(Vector3 worldPosition)
+    public PopupBase CreateTimerPopup(Vector3 worldPosition)
     {
         var popup = Instantiate(_popupPrefab, _worldCanvas.transform);
         popup.transform.position = worldPosition;
         return popup.GetComponent<PopupBase>();
+    }
+
+    public PopupEmoji CreateEmojiPopup(Vector3 worldPosition, EmojiType emojiType)
+    {
+        var popup = Instantiate(_popupEmoji, _worldCanvas.transform).GetComponent<PopupEmoji>();
+        popup.transform.position = worldPosition;
+        popup.Setup(emojiType);
+        return popup;
     }
 }

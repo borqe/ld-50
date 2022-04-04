@@ -120,6 +120,8 @@ MonoBehaviour:
   _inGameUI: {fileID: 2023069717893720278}
   _popupPrefab: {fileID: 7146650300674314695, guid: 0e93c028938184530b71fe98fbbc402b,
     type: 3}
+  _popupEmoji: {fileID: 7146650300674314695, guid: f82417a467171914fb4b52cc76711b22,
+    type: 3}
 --- !u!114 &9071692060132214249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,7 +380,7 @@ PrefabInstance:
     - target: {fileID: 4337041383045254491, guid: 1424ac8484e0049b39be7ef8d555b057,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 950
+      value: 257
       objectReference: {fileID: 0}
     - target: {fileID: 5977835739038345469, guid: 1424ac8484e0049b39be7ef8d555b057,
         type: 3}
@@ -588,7 +590,7 @@ PrefabInstance:
     - target: {fileID: 7223421174990561373, guid: 1424ac8484e0049b39be7ef8d555b057,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 535
       objectReference: {fileID: 0}
     - target: {fileID: 7223421174990561373, guid: 1424ac8484e0049b39be7ef8d555b057,
         type: 3}
@@ -618,7 +620,7 @@ PrefabInstance:
     - target: {fileID: 7732021581845459910, guid: 1424ac8484e0049b39be7ef8d555b057,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 555
       objectReference: {fileID: 0}
     - target: {fileID: 7732021581845459910, guid: 1424ac8484e0049b39be7ef8d555b057,
         type: 3}
@@ -628,12 +630,12 @@ PrefabInstance:
     - target: {fileID: 7771265952004886187, guid: 1424ac8484e0049b39be7ef8d555b057,
         type: 3}
       propertyPath: m_Size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771265952004886187, guid: 1424ac8484e0049b39be7ef8d555b057,
         type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7998136416294308049, guid: 1424ac8484e0049b39be7ef8d555b057,
         type: 3}
@@ -653,7 +655,7 @@ PrefabInstance:
     - target: {fileID: 7998136416294308049, guid: 1424ac8484e0049b39be7ef8d555b057,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 515
       objectReference: {fileID: 0}
     - target: {fileID: 7998136416294308049, guid: 1424ac8484e0049b39be7ef8d555b057,
         type: 3}

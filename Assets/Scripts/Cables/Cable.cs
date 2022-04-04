@@ -43,7 +43,7 @@ public class Cable : MonoBehaviour
         OnDisconnected = onDisconnected;
 
         module.OnCableDisconnected += Disconnected;
-        PopupBase popup = GameUI.Instance.CreatePopup(ConsoleModule.CableAttachementPosition.position + new Vector3(0, 0.5f, 0));
+        PopupBase popup = GameUI.Instance.CreateTimerPopup(ConsoleModule.CableAttachementPosition.position + new Vector3(0, 0.5f, 0));
         popup.onTimerEnd += () => onFullyConencted(this);
         ConnectingPopup = popup;
     }
