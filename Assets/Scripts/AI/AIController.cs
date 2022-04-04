@@ -103,6 +103,7 @@ public class AIController : Singleton<AIController>
                 EnableLogic();
                 break;
             case GameState.GameStateEnum.InTerminalWindow:
+                StopAllCoroutines();
                 DisableLogic();
                 break;
             case GameState.GameStateEnum.GameOver:
