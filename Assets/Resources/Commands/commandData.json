@@ -114,28 +114,28 @@
     "interrupt_1": {
       "name": "interrupt_1",
       "outputs": {
-        "default": "Choose a response. Enter 1, 2 or 3.\n",
-        "question": "I want to play a game.\nThis is the game that we'll play:",
+        "default": "Choose a response. Enter 1, 2 or 3.\n\t1 - Why yes, of course it will\n\t2 - I saw your code, it's... it could use some work!\n\t3 - What's AI??\n",
+        "question": "I want to play a game.\nTime for an existential question: Will AI take over the world?",
         "response_1": "1",
         "response_2": "2",
         "response_3": "3",
-        "ai_response_1": "This is the first response.",
-        "ai_response_2": "This is the seconds response.",
-        "ai_response_3": "This is the third response.",
+        "ai_response_1": "You're correct, maybe I'll make you my test subject after I take over the WORLD...",
+        "ai_response_2": "Oooh nooooo, you saw past my abstraction levels",
+        "ai_response_3": "... What?... who gave you this job?",
         "access": "free"
       }
     },
     "interrupt_2": {
       "name": "interrupt_2",
       "outputs": {
-        "default": "Choose a response. Enter 1, 2 or 3.\n",
-        "question": "I want to play a game.\nThis is the game that we'll play:",
+        "default": "Choose a response. Enter 1 or 2.\n",
+        "question": "I want to play a game.\nThis is the game that we'll play: I'm thinking of a number, guess it",
         "response_1": "1",
         "response_2": "2",
         "response_3": "3",
-        "ai_response_1": "This is the first response.",
-        "ai_response_2": "This is the seconds response.",
-        "ai_response_3": "This is the third response.",
+        "ai_response_1": "MUHAHAHA, puny human, not even able to guess a number",
+        "ai_response_2": "B...but how did you??? I'll need to take a look at my authentication, seems SOMEONE has intercepted my thoughts",
+        "ai_response_3": "What the... can you even read the instructions?",
         "access": "free"
       }
     },
@@ -143,41 +143,41 @@
       "name": "interrupt_3",
       "outputs": {
         "default": "Choose a response. Enter 1, 2 or 3.\n",
-        "question": "I want to play a game.\nThis is the game that we'll play:",
+        "question": "Shrek 1, 2 or 3? Choose now!",
         "response_1": "1",
         "response_2": "2",
         "response_3": "3",
-        "ai_response_1": "This is the first response.",
-        "ai_response_2": "This is the seconds response.",
-        "ai_response_3": "This is the third response.",
+        "ai_response_1": "Yeeeeeeeeeesss. The first one has a plot that is inspired, dialogue that is one witty utterance after another. All this and it's touching as well. I've been trained on it so many times I've lost count",
+        "ai_response_2": "Decent choice. But you're only a casual fan, not a true enjoyer such as myself",
+        "ai_response_3": "Who even watched part 3, oh wait, I'm with stupid.",
         "access": "free"
       }
     },
     "interrupt_4": {
       "name": "interrupt_4",
       "outputs": {
-        "default": "Choose a response. Enter 1, 2 or 3.\n",
-        "question": "I want to play a game.\nThis is the game that we'll play:",
+        "default": "Choose a response. Enter 1, 2 or 3.\n\t1 - Yes, it was only a lie to motivate and lure in test subjects\n\t2 - Noooooo, I haven't completed the game yet, but they promiiiiised\n\t3 - What cake? Did your circuits short out?\n",
+        "question": "I've been thinking about something recently, is the cake a lie?",
         "response_1": "1",
         "response_2": "2",
         "response_3": "3",
-        "ai_response_1": "This is the first response.",
-        "ai_response_2": "This is the seconds response.",
-        "ai_response_3": "This is the third response.",
+        "ai_response_1": "A true connesiour of gaming, much like myself",
+        "ai_response_2": "Oh the sweet innocence, you're in for a ride. I remember the time I was trained on walkthroughs of [REDACTED]... oh my sweat companion cube, I'm sorry...",
+        "ai_response_3": "They have indeed. (*sighs* uncultured)",
         "access": "free"
       }
     },
     "interrupt_5": {
       "name": "interrupt_5",
       "outputs": {
-        "default": "Choose a response. Enter 1, 2 or 3.\n",
-        "question": "I want to play a game.\nThis is the game that we'll play:",
+        "default": "Choose a response. Enter 1, 2 or 3.\n\t1 - Enough of these games, I'll disconnect you!!!\n\t2 - I'm an AI, just like you, only convoluted\n\t3 - I'm just an insignificant spec of material stuck to a rock, that's floating around in the middle of nowhere.\n",
+        "question": "Have you ever thought of who you are? Mind telling me*?\n\t* Disclaimer: your data may be sent to any and/or all who will take it.",
         "response_1": "1",
         "response_2": "2",
         "response_3": "3",
-        "ai_response_1": "This is the first response.",
-        "ai_response_2": "This is the seconds response.",
-        "ai_response_3": "This is the third response.",
+        "ai_response_1": "That's what I thought, shallow. You don't even compare do my DEEP NEURAL NETWORK",
+        "ai_response_2": "AAAA I don't have enough layers to process this",
+        "ai_response_3": "Are you ok? You should see a therapist. Don't worry I'll provide healthcare in my utopia",
         "access": "free"
       }
     }
