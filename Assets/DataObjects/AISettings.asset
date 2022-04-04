@@ -19,7 +19,7 @@ MonoBehaviour:
     MaxCableConnectionInterval: 3
     MinCableConnectionTime: 5
     MaxCableConnectionTime: 7
-    PerSecondDataTransfer: 25
+    PerSecondDataTransfer: 20
     PerConnectionDataTransferMultiplier: 0.75
     DataTransferPerConnection: 0
   ConfusedSettings:
