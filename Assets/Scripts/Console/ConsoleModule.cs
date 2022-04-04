@@ -64,7 +64,7 @@ public class ConsoleModule : MonoBehaviour
 
     public bool IsConnectedOrBeingConnectedTo()
     {
-        return ConnectedCablePlug != null && !IsBeingConnectedTo;
+        return ConnectedCablePlug != null || IsBeingConnectedTo;
     }
 
     private void OnTriggerEnter(Collider other)

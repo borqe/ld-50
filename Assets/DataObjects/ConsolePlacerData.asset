@@ -16,4 +16,4 @@ MonoBehaviour:
     type: 3}
   AmountOfConsoles: 12
   DistanceFromCenter: 10
-  AmountOfModulesToRemoveFromConsoles: 0.333
+  AmountOfModulesToRemoveFromConsoles: 0.3333

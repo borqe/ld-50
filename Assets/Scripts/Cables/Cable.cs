@@ -83,6 +83,11 @@ public class Cable : MonoBehaviour
 
     public void SetIsFullyConnected(bool value)
     {
+        // dirty fix for when game state ends and this begins to flood null references
+        if (this == null)
+            return;
+
+
         IsFullyConnected = value;
         EnableDataTransferAnimation(value);
     }
