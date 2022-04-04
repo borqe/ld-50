@@ -4,7 +4,6 @@ using UnityEngine;
 public class InGameUI: MonoBehaviour
 {
     [SerializeField] private GameObject _progressSlider;
-    [SerializeField] private GameObject _otherStats;
     [SerializeField] private GameObject _statusIndicator;
     [SerializeField] private GameObject _terminalHint;
 
@@ -52,7 +51,6 @@ public class InGameUI: MonoBehaviour
     private void ActivateUI(bool active)
     {
         _progressSlider.SetActive(active);
-        _otherStats.SetActive(active);
         _statusIndicator.SetActive(active);
     }
 }
