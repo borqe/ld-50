@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using AI;
 using ConsoleInput;
 using Terminal.Commands;
 using TMPro;
@@ -38,6 +39,7 @@ public class TerminalWindow : MonoBehaviour
         UpdateUser(Settings.UserString);
         _terminalInput.onSubmit.AddListener(OnTerminalSubmit);
         GameStateChangedEvent.AddListener(OnGameStateChanged);
+        AIInterrupt.AIInterruptEvent.AddListener(OnAIInterruption);
         ResetPosition();
     }
 
@@ -46,6 +48,15 @@ public class TerminalWindow : MonoBehaviour
         _terminalInput.onSubmit.RemoveListener(OnTerminalSubmit);
         _eventSystem.SetSelectedGameObject(null);
         GameStateChangedEvent.RemoveListener(OnGameStateChanged);
+        AIInterrupt.AIInterruptEvent.RemoveListener(OnAIInterruption);
+    }
+    
+    private void OnAIInterruption(AIInterrupt.AIInterruptEvent info)
+    {
+        new SetGameStateEvent(GameState.GameStateEnum.InTerminalWindow).Broadcast();
+        OpenTerminal();
+        ClearLastCommand();
+        HandleCommand("interrupt");
     }
 
     private void OnGameStateChanged(GameStateChangedEvent eventData)
@@ -66,8 +77,6 @@ public class TerminalWindow : MonoBehaviour
             case GameState.GameStateEnum.GameNotStarted:
                 OpenTerminal();
                 Reset();
-                break;
-            default:
                 break;
         }
     }

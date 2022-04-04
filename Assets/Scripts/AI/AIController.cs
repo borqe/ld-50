@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using AI;
 using UnityEngine;
 
 public class AIData
@@ -105,6 +106,7 @@ public class AIController : Singleton<AIController>
                 DisableLogic();
                 break;
             case GameState.GameStateEnum.GameOver:
+                StopAllCoroutines();
                 DisableLogic();
                 ClearCaches();
                 break;
@@ -207,7 +209,6 @@ public class AIController : Singleton<AIController>
     {
         AIData.DataTransfered += value;
         new AIDataTransferedEvent(AIData.DataTransfered, Settings.MaxCharge).Broadcast();
-
         if (AIData.DataTransfered >= Settings.MaxCharge)
             GameOver();
     }

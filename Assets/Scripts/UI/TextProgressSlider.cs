@@ -9,6 +9,7 @@ public class TextProgressSlider : MonoBehaviour
     [SerializeField] private float _progress;
     private void OnEnable()
     {
+        Refresh(0, true);
         AIDataTransferedEvent.AddListener(OnAIDataTransferred);
     }
 
@@ -23,8 +24,10 @@ public class TextProgressSlider : MonoBehaviour
         Refresh(Mathf.RoundToInt(_progress));
     }
 
-    private void Refresh(int value)
+    private void Refresh(int value, bool overwrite = false)
     {
+        if (value == 0 && overwrite == false) return;
+        
         string percentage = value + "%";
         // Because there can be only 50 symbols in the middle
         string progressString = String.Concat(Enumerable.Repeat("=", value / 2)) + String.Concat(Enumerable.Repeat(" ", 50 - value / 2));

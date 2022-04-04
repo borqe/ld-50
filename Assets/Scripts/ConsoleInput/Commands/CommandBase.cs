@@ -18,8 +18,9 @@ namespace Terminal.Commands
             this._originalString = originalInput;
         }
 
-        public void Execute()
+        public virtual void Execute()
         {
+            _lastResponse = "";
             if (Authorize())
             {
                 terminal?.StartCoroutine(ExecuteCoroutine());

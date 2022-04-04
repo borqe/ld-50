@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using AI;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AIState_Charging : AIState
@@ -46,6 +48,15 @@ public class AIState_Charging : AIState
         ConnectingCables.AddRange(AIController.ConnectingCables.ToArray());
         NextCableConnectionIn = 0;
         new AIStateChangedEvent(AIStateType.TransferingData).Broadcast();
+        AIController.StartCoroutine(InterruptionCoroutine());
+    }
+
+    private IEnumerator InterruptionCoroutine()
+    {
+        float timeUntilInterruption = UnityEngine.Random.Range(3.0f, 7.0f);
+        yield return new WaitForSeconds(timeUntilInterruption);
+        new AIInterrupt.AIInterruptEvent().Broadcast();
+        new SetAIStateEvent(AIStateType.Idle).Broadcast();
     }
 
     public override void Update()

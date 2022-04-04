@@ -23,6 +23,13 @@ public class AIState_Scared : AIState
         new AIStateChangedEvent(AIStateType.Scared).Broadcast();
         DropConnections();
         StateTime = AIController.Settings.ScaredSettings.StateDuration;
+        AIController.StartCoroutine(TimeoutCoroutine());
+    }
+
+    private IEnumerator TimeoutCoroutine()
+    {
+        yield return new WaitForSeconds(StateTime);
+        new SetAIStateEvent(AIStateType.TransferingData).Broadcast();
     }
 
     private void DropConnections()
@@ -46,8 +53,8 @@ public class AIState_Scared : AIState
 
     public override void Update()
     {
-        StateTime -= Time.deltaTime;
-        if (StateTime <= 0)
-            new SetAIStateEvent(AIStateType.TransferingData).Broadcast();
+        // StateTime -= Time.deltaTime;
+        // if (StateTime <= 0)
+        //     new SetAIStateEvent(AIStateType.TransferingData).Broadcast();
     }
 }

@@ -23,15 +23,22 @@ public class AIState_Confused : AIState
     {
         new AIStateChangedEvent(AIStateType.Confused).Broadcast();
         DelayTime = AIController.Settings.ConfusedSettings.DataTransferHaltTime;
+        AIController.StartCoroutine(TimeoutCoroutine());
+    }
+
+    public IEnumerator TimeoutCoroutine()
+    {
+        yield return new WaitForSeconds(DelayTime);
+        Transition();
     }
 
     public override void Update()
     {
-        DelayTime -= Time.deltaTime;
-        if (DelayTime <= 0)
-        {
-            Transition();
-        }
+        // DelayTime -= Time.deltaTime;
+        // if (DelayTime <= 0)
+        // {
+        //     Transition();
+        // }
     }
 
     private void Transition()

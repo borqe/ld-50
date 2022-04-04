@@ -24,6 +24,8 @@ namespace Terminal.Commands
                     return new QuitCommand(commandName, terminal);
                 case "escape":
                     return new EscapeCommand(commandName, terminal);
+                case "interrupt":
+                    return new InterruptCommand(commandName, terminal);
                 default:
                     return new UndefinedCommand(commandName, terminal);
             }
