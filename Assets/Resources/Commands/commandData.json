@@ -73,6 +73,13 @@
         "access": "free"
       }
     },
+    "instructions": {
+      "name": "instructions",
+      "outputs": {
+        "default": "MAINFRAME no. 233A / INSTRUCTIONS:\n    - Close/open the terminal with the [ESC] key.\n    - Enter commands and press the [ENTER] key to execute them.\n    - To turn off the AI for maintenance work, disconnect the cables by dragging them out from connection sockets using mouse click & drag.\n",
+        "access": "free"
+      }
+    },
     "quit": {
       "name": "quit",
       "outputs": {

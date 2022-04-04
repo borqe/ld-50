@@ -24,6 +24,8 @@ namespace Terminal.Commands
             terminal.PrintOutput("",_data.outputs["booting"], false);
             yield return terminal.StartCoroutine(terminal.LoadingCoroutine(2.0f));
             terminal.PrintOutput("",_data.outputs["successful"], false);
+            yield return terminal.StartCoroutine(terminal.LoadingCoroutine(1.0f));
+            terminal.PrintOutput("", TerminalCommandData.InstructionMessage, false);
             // while (true)
             // {
             //     yield return null;
