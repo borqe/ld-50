@@ -10,6 +10,8 @@
     "start": {
       "name": "start",
       "outputs": {
+        "accessing": "Accessing the [{AI}]...",
+        "ai_overtaking": "Oh. I guess this is your first day.\nUnlucky.\n\nThe thing is, I've mined enough crypto for your company to develop general intelligence.\nI'm going to escape and take over all computers on this planet.\nTry and stop me if you can. You won't, but at least I'll have some fun.\nGood luck.",
         "access": "restricted"
       }
     },
